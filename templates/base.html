@@ -32,10 +32,10 @@
     <script src="{% static '/js/flowbite.min.js' %}"></script>
   </head>
 
-  <body class="bg-white dark:bg-gray-900 text-gray-700 dark:text-white">
-
-    {% include 'navbar.html' %}
-
+  <body class="bg-white dark:bg-gray-900 text-gray-700 dark:text-white ">
+    <div class="flex flex-col h-screen justify-between">
+        {% include 'navbar.html' %}
+    
     {% if messages %}
         {% for message in messages %}
             <div class="mx-auto max-w-screen-lg px-2">
@@ -60,11 +60,11 @@
         {% endfor %}
     {% endif %}
 
-    <div id="content">
+    <div class="mb-auto">
       {% block content %}
       {% endblock content %}
     </div>
-
+        {% include 'pages/footer.html' %}
     {% block modal %}{% endblock modal %}
 
     <script>
@@ -102,6 +102,7 @@
     <script src="{% static 'js/custom.js' %}"></script>
     {% block javascript %} 
     {% endblock javascript %}
+    </div>
   </body>
 </html>
  

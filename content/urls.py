@@ -10,4 +10,5 @@ urlpatterns = [
     path("<slug>/", CourseDetailView.as_view(), name='course-detail'),
     path("<slug>/<video_slug>/", VideoDetailView.as_view(), name='video-detail'),
     
+    
 ]

@@ -4,29 +4,7 @@
 {% load static i18n %}
 
 {% block content %}
-    {% comment %} <section class="text-gray-700 dark:text-white body-font">
-        <div class="py-16 flex flex-wrap">
-            {% if has_permission %}
-                <div class="flex flex-wrap w-full">
-                <div class="hidden md:block md:w-1/4 md:pr-10 md:py-6">
-                    {% for video in course.videos.all %}
-                        {% include 'content/snippets/video_step.html' with video=video %}
-                    {% endfor %}
-                </div>
-                <div class="md:w-3/4 md:mt-0">
-                    <img class="w-full object-cover object-center rounded-lg" src="{{ object.thumbnail.url }}" alt="step">
-                    <p class="text-gray-500">{{ object.description }}</p>
-                </div>
-                <div class="block md:hidden w-full mt-5 py-5">
-                    {% for video in course.videos.all %}
-                        {% include 'content/snippets/video_step.html' with video=video %}
-                    {% endfor %}
-                </div>
-            {% else %}
-                <px class='text-center mx-auto text-lg'>You do not have permission to view this course. Upgrade your subscription to start</p>
-            {% endif %}
-        </div>
-    </section> {% endcomment %}
+
 
     <div class="max-w-screen-xl mx-auto px-4">
         {% if has_permission %}
@@ -427,12 +405,12 @@
             <div class="p-4">
               <canvas id="product-chart" style="position: relative;"  data-url="/"></canvas>
             </div> -->
-            <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
-                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+            <div class="mb-4 dark:border-gray-700">
+                <ul class="flex flex-wrap -mb-px  text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                     <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Orders</button>
+                        <button class="inline-block p-4 text-2xl  text-gray-700 dark:text-white" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Growth rate</button>
                     </li>
-                    <li class="mr-2" role="presentation">
+                    {% comment %} <li class="mr-2" role="presentation">
                         <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Dashboard</button>
                     </li>
                     <li class="mr-2" role="presentation">
@@ -440,7 +418,7 @@
                     </li>
                     <li role="presentation">
                         <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts" aria-selected="false">Contacts</button>
-                    </li>
+                    </li> {% endcomment %}
                 </ul>
             </div>
             <div id="myTabContent">
@@ -573,9 +551,292 @@
               </div>
           </div>  {% endcomment %}
         </div>
+        
+        <h2 class="mt-8 mb-4 text-2xl text-gray-700 dark:text-white text-center">Reated products</h2>
+        <div class="grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-3  xl:gap-x-8">
+          {% if course.first_related_post %}
+              <div class="group relative block overflow-hidden rounded-lg shadow-lg">
+                  <div class="flex items-center justify-between mb-4">
+                      <div class="flex items-center space-x-2">
+                          <div class="-space-y-1">
+                              <h2 class="text-lg text-gray-700 dark:text-gray-200">{{ course.first_related_post.name_of_store|title}}</h2>
+                              <span class='text-base text-gray-700 dark:text-gray-200'>{% translate "Since" %}: {{ course.first_related_post.created_at|date:"N j, Y,"}}</span>
+                          </div>
+                      </div>
+                      
+                      <div class="flex items-center space-x-3">
+                          {% if course.first_related_post.is_faceBook %}
+                              <button type="button" title="Like post" 
+                                  class="flex     
+                                  items-center justify-center dark:bg-white  
+                                  text-blue-500 hover:text-gray-200 hover:bg-gray-500 rounded-full p-1.5">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-facebook " viewBox="0 0 16 16">
+                                      <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                                  </svg>
+                              </button>
+                          {% endif %}
+                          {% if course.first_related_post.is_tiktok %}
+                              <button type="button" title="Like post" 
+                                  class="flex items-center justify-center hover:bg-white hover:text-[#ff0050] text-gray-200
+                                  bg-[#ff0050] rounded-full p-1.5">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-tiktok" viewBox="0 0 16 16">
+                                      <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/>
+                                  </svg>
+                              </button>
+                          {% endif %}
+                          {% if course.first_related_post.is_pinterest %}
+                              <button type="button" title="Like post" 
+                                  class="flex items-center justify-center
+                                  bg-[#E60023]  text-gray-200 hover:text-[#E60023] hover:bg-white rounded-full p-1.5">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pinterest" viewBox="0 0 16 16">
+                                      <path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.938-3.977.938-3.977s-.239-.479-.239-1.187c0-1.113.645-1.943 1.448-1.943.682 0 1.012.512 1.012 1.127 0 .686-.437 1.712-.663 2.663-.188.796.4 1.446 1.185 1.446 1.422 0 2.515-1.5 2.515-3.664 0-1.915-1.377-3.254-3.342-3.254-2.276 0-3.612 1.707-3.612 3.471 0 .688.265 1.425.595 1.826a.24.24 0 0 1 .056.23c-.061.252-.196.796-.222.907-.035.146-.116.177-.268.107-1-.465-1.624-1.926-1.624-3.1 0-2.523 1.834-4.84 5.286-4.84 2.775 0 4.932 1.977 4.932 4.62 0 2.757-1.739 4.976-4.151 4.976-.811 0-1.573-.421-1.834-.919l-.498 1.902c-.181.695-.669 1.566-.995 2.097A8 8 0 1 0 8 0z"/>
+                                  </svg>
+                              </button>
+                          {% endif %}
+                      </div>
+                  </div>
+                  <div class="flex items-center justify-center">
+                      {% if course.first_related_post.has_video %}
+                          <button
+                              class="absolute bg-gray-800 bg-opacity-30 hover:bg-opacity-30 p-4 rounded-full text-gray-200 hover:bg-white hover:text-gray-800">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                                  <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                              </svg>
+                          </button>
+                      {% endif %}
+                      <img
+                      src="{{ course.first_related_post.product_thumbnail.url }}"
+                      alt=""
+                      class="aspect-square rounded-lg  w-full object-cover"
+                      />
+                  </div>
+                  <div class="relative px-3">
+                      <a class="" href="{{ course.first_related_post.get_absolute_url }}">
+                          <h1 class="text-center text-lg font-medium text-gray-700 dark:text-gray-200 mt-2">
+                              {{ course.first_related_post.name_of_product|title|truncatechars:26  }}
+                          </h1>
+                      </a>
+                      <div class="grid grid-cols-3 text-gray-700 dark:text-gray-200 gap-2 ">
+                          <div class="flex flex-col justify-start p-2">
+                              <p class="flex text-lg font-medium">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-hand-thumbs-up-fill mr-2" viewBox="0 0 16 16">
+                                      <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                                  </svg>
+                                  {{ course.first_related_post.facebook_like|cool_num }}
+                              </p>
+                          </div>
+                          <div class="flex flex-col justify-start p-2">
+                              <p class="flex text-lg font-medium">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots-fill mr-2" viewBox="0 0 16 16">
+                                      <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                  </svg>
+                                  {{ course.first_related_post.facebook_comment|cool_num }}
+                              </p>
+                          </div>
+                          <div class="flex flex-col justify-start p-2">
+                              <p class="flex text-lg font-medium">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-fill mr-2" viewBox="0 0 16 16">
+                                      <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                      <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                  </svg>
+                                  {{ course.first_related_post.facebook_views|cool_num }}
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          {% endif %}
+          {% if course.second_related_post %}
+              <div class="group relative block overflow-hidden rounded-lg shadow-lg">
+                  <div class="flex items-center justify-between mb-4">
+                      <div class="flex items-center space-x-2">
+                          <div class="-space-y-1">
+                              <h2 class="text-lg text-gray-700 dark:text-gray-200">{{ course.second_related_post.name_of_store|title}}</h2>
+                              <span class='text-base text-gray-700 dark:text-gray-200'>{% translate "Since" %}: {{ course.second_related_post.created_at|date:"N j, Y,"}}</span>
+                          </div>
+                      </div>
+                      
+                      <div class="flex items-center space-x-3">
+                          {% if course.second_related_post.is_faceBook %}
+                              <button type="button" title="Like post" 
+                                  class="flex     
+                                  items-center justify-center dark:bg-white  
+                                  text-blue-500 hover:text-gray-200 hover:bg-gray-500 rounded-full p-1.5">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-facebook " viewBox="0 0 16 16">
+                                      <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                                  </svg>
+                              </button>
+                          {% endif %}
+                          {% if course.second_related_post.is_tiktok %}
+                              <button type="button" title="Like post" 
+                                  class="flex items-center justify-center hover:bg-white hover:text-[#ff0050] text-gray-200
+                                  bg-[#ff0050] rounded-full p-1.5">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-tiktok" viewBox="0 0 16 16">
+                                      <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/>
+                                  </svg>
+                              </button>
+                          {% endif %}
+                          {% if course.second_related_post.is_pinterest %}
+                              <button type="button" title="Like post" 
+                                  class="flex items-center justify-center
+                                  bg-[#E60023]  text-gray-200 hover:text-[#E60023] hover:bg-white rounded-full p-1.5">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pinterest" viewBox="0 0 16 16">
+                                      <path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.938-3.977.938-3.977s-.239-.479-.239-1.187c0-1.113.645-1.943 1.448-1.943.682 0 1.012.512 1.012 1.127 0 .686-.437 1.712-.663 2.663-.188.796.4 1.446 1.185 1.446 1.422 0 2.515-1.5 2.515-3.664 0-1.915-1.377-3.254-3.342-3.254-2.276 0-3.612 1.707-3.612 3.471 0 .688.265 1.425.595 1.826a.24.24 0 0 1 .056.23c-.061.252-.196.796-.222.907-.035.146-.116.177-.268.107-1-.465-1.624-1.926-1.624-3.1 0-2.523 1.834-4.84 5.286-4.84 2.775 0 4.932 1.977 4.932 4.62 0 2.757-1.739 4.976-4.151 4.976-.811 0-1.573-.421-1.834-.919l-.498 1.902c-.181.695-.669 1.566-.995 2.097A8 8 0 1 0 8 0z"/>
+                                  </svg>
+                              </button>
+                          {% endif %}
+                      </div>
+                  </div>
+                  <div class="flex items-center justify-center">
+                      {% if course.second_related_post.has_video %}
+                          <button
+                              class="absolute bg-gray-800 bg-opacity-30 hover:bg-opacity-30 p-4 rounded-full text-gray-200 hover:bg-white hover:text-gray-800">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                                  <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                              </svg>
+                          </button>
+                      {% endif %}
+                      <img
+                      src="{{ course.second_related_post.product_thumbnail.url }}"
+                      alt=""
+                      class="aspect-square rounded-lg  w-full object-cover"
+                      />
+                  </div>
+                  <div class="relative px-3">
+                      <a class="" href="{{ course.second_related_post.get_absolute_url }}">
+                          <h1 class="text-center text-lg font-medium text-gray-700 dark:text-gray-200 mt-2">
+                              {{ course.second_related_post.name_of_product|title|truncatechars:26  }}
+                          </h1>
+                      </a>
+                      <div class="grid grid-cols-3 text-gray-700 dark:text-gray-200 gap-2 ">
+                          <div class="flex flex-col justify-start p-2">
+                              <p class="flex text-lg font-medium">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-hand-thumbs-up-fill mr-2" viewBox="0 0 16 16">
+                                      <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                                  </svg>
+                                  {{ course.second_related_post.facebook_like|cool_num }}
+                              </p>
+                          </div>
+                          <div class="flex flex-col justify-start p-2">
+                              <p class="flex text-lg font-medium">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots-fill mr-2" viewBox="0 0 16 16">
+                                      <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                  </svg>
+                                  {{ course.second_related_post.facebook_comment|cool_num }}
+                              </p>
+                          </div>
+                          <div class="flex flex-col justify-start p-2">
+                              <p class="flex text-lg font-medium">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-fill mr-2" viewBox="0 0 16 16">
+                                      <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                      <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                  </svg>
+                                  {{ course.second_related_post.facebook_views|cool_num }}
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          {% endif %}
+          {% if course.third_related_post %}
+              <div class="group relative block overflow-hidden rounded-lg shadow-lg">
+                  <div class="flex items-center justify-between mb-4">
+                      <div class="flex items-center space-x-2">
+                          <div class="-space-y-1">
+                              <h2 class="text-lg text-gray-700 dark:text-gray-200">{{ course.third_related_post.name_of_store|title}}</h2>
+                              <span class='text-base text-gray-700 dark:text-gray-200'>{% translate "Since" %}: {{ course.third_related_post.created_at|date:"N j, Y,"}}</span>
+                          </div>
+                      </div>
+                      
+                      <div class="flex items-center space-x-3">
+                          {% if course.third_related_post.is_faceBook %}
+                              <button type="button" title="Like post" 
+                                  class="flex     
+                                  items-center justify-center dark:bg-white  
+                                  text-blue-500 hover:text-gray-200 hover:bg-gray-500 rounded-full p-1.5">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-facebook " viewBox="0 0 16 16">
+                                      <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                                  </svg>
+                              </button>
+                          {% endif %}
+                          {% if course.third_related_post.is_tiktok %}
+                              <button type="button" title="Like post" 
+                                  class="flex items-center justify-center hover:bg-white hover:text-[#ff0050] text-gray-200
+                                  bg-[#ff0050] rounded-full p-1.5">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-tiktok" viewBox="0 0 16 16">
+                                      <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/>
+                                  </svg>
+                              </button>
+                          {% endif %}
+                          {% if course.third_related_post.is_pinterest %}
+                              <button type="button" title="Like post" 
+                                  class="flex items-center justify-center
+                                  bg-[#E60023]  text-gray-200 hover:text-[#E60023] hover:bg-white rounded-full p-1.5">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pinterest" viewBox="0 0 16 16">
+                                      <path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.938-3.977.938-3.977s-.239-.479-.239-1.187c0-1.113.645-1.943 1.448-1.943.682 0 1.012.512 1.012 1.127 0 .686-.437 1.712-.663 2.663-.188.796.4 1.446 1.185 1.446 1.422 0 2.515-1.5 2.515-3.664 0-1.915-1.377-3.254-3.342-3.254-2.276 0-3.612 1.707-3.612 3.471 0 .688.265 1.425.595 1.826a.24.24 0 0 1 .056.23c-.061.252-.196.796-.222.907-.035.146-.116.177-.268.107-1-.465-1.624-1.926-1.624-3.1 0-2.523 1.834-4.84 5.286-4.84 2.775 0 4.932 1.977 4.932 4.62 0 2.757-1.739 4.976-4.151 4.976-.811 0-1.573-.421-1.834-.919l-.498 1.902c-.181.695-.669 1.566-.995 2.097A8 8 0 1 0 8 0z"/>
+                                  </svg>
+                              </button>
+                          {% endif %}
+                      </div>
+                  </div>
+                  <div class="flex items-center justify-center">
+                      {% if course.third_related_post.has_video %}
+                          <button
+                              class="absolute bg-gray-800 bg-opacity-30 hover:bg-opacity-30 p-4 rounded-full text-gray-200 hover:bg-white hover:text-gray-800">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                                  <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                              </svg>
+                          </button>
+                      {% endif %}
+                      <img
+                      src="{{ course.third_related_post.product_thumbnail.url }}"
+                      alt=""
+                      class="aspect-square rounded-lg  w-full object-cover"
+                      />
+                  </div>
+                  <div class="relative px-3">
+                      <a class="" href="{{ course.third_related_post.get_absolute_url }}">
+                          <h1 class="text-center text-lg font-medium text-gray-700 dark:text-gray-200 mt-2">
+                              {{ course.third_related_post.name_of_product|title|truncatechars:26  }}
+                          </h1>
+                      </a>
+                      <div class="grid grid-cols-3 text-gray-700 dark:text-gray-200 gap-2 ">
+                          <div class="flex flex-col justify-start p-2">
+                              <p class="flex text-lg font-medium">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-hand-thumbs-up-fill mr-2" viewBox="0 0 16 16">
+                                      <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                                  </svg>
+                                  {{ course.third_related_post.facebook_like|cool_num }}
+                              </p>
+                          </div>
+                          <div class="flex flex-col justify-start p-2">
+                              <p class="flex text-lg font-medium">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots-fill mr-2" viewBox="0 0 16 16">
+                                      <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                  </svg>
+                                  {{ course.third_related_post.facebook_comment|cool_num }}
+                              </p>
+                          </div>
+                          <div class="flex flex-col justify-start p-2">
+                              <p class="flex text-lg font-medium">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-fill mr-2" viewBox="0 0 16 16">
+                                      <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                      <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                  </svg>
+                                  {{ course.third_related_post.facebook_views|cool_num }}
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          {% endif %}
+        </div>
+
         {% else %}
-            <px class='text-center mx-auto text-lg'>You do not have permission to view this course. Upgrade your subscription to start</p>
+            <p class='text-center mx-auto text-lg'>You do not have permission to view this course. Upgrade your subscription to start</p>
         {% endif %}
+
+
     </div>
 {% endblock content %}
 

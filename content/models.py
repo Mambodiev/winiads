@@ -206,7 +206,8 @@ class Store(models.Model):
         
     def __str__(self):
         return self.name
-
+    class Meta:
+        verbose_name_plural = "1. Stores" 
 
 class Order(models.Model):
     user = models.ForeignKey(
@@ -753,8 +754,14 @@ class Course(models.Model):
     price_margin = models.DecimalField(default=0, max_digits=10, decimal_places=2, help_text = "Profit you get from this product")
     updated_at = AutoDateTimeField(default=timezone.now)
     aliexpress_total_sale = models.DecimalField(default=0, max_digits=10, decimal_places=2, help_text = "Amount of aliexpress sale generated")
-    site_type = models.IntegerField(choices=SITE_TYPE_CHOICES, default=0)
-
+    site_type = models.IntegerField(choices=SITE_TYPE_CHOICES, default=0)    
+    first_related_post = models.ForeignKey(
+        'self', related_name='first_related', on_delete=models.SET_NULL, blank=True, null=True)
+    second_related_post = models.ForeignKey(
+        'self', related_name='second_related', on_delete=models.SET_NULL, blank=True, null=True)
+    third_related_post = models.ForeignKey(
+        'self', related_name='third_related', on_delete=models.SET_NULL, blank=True, null=True)
+    
     def get_absolute_url(self):
         return reverse("content:course-detail", kwargs={"slug": self.slug})
     
@@ -801,7 +808,8 @@ class Course(models.Model):
     def get_absolute_url(self):
         return reverse("content:course-detail", kwargs={"slug": self.slug})
 
-
+    class Meta:
+            verbose_name_plural = "1. Courses" 
 
 class OtherShopifyLinks(models.Model):
     course = models.ForeignKey(Course, on_delete=models.PROTECT)

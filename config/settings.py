@@ -17,6 +17,8 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
+    'jet.dashboard',
+    'jet',
     "django.contrib.admin",
     "django.forms",
     'storages',
@@ -48,6 +50,9 @@ LOCAL_APPS = [
     "users",
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+NOTIFY_EMAIL = 'mambodieu@gmail.com'
+DEFAULT_FROM_EMAIL = 'mambodieu@gmail.com'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -97,9 +102,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-# import dj_database_url
-# db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-# DATABASES['default'].update(db_from_env)
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -114,17 +117,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
-TAILWIND_APP_NAME = 'theme'
-CRISPY_TEMPLATE_PACK = "tailwind"
-CRISPY_CLASS_CONVERTERS = {
-    'textinput': 'dark:text-white text-gray-700'
-}
+
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
@@ -138,14 +138,26 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-ADMIN_URL = "admin/"
+
 SITE_ID = 1
 
 
 LOGIN_REDIRECT_URL = "content:course-list"
-
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
+ACCOUNT_USER_MODEL_USERNAME_FIELD = "username"
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = None
 
 DJANGO_WYSIWYG_FLAVOR = "ckeditor"
+
+
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
 CKEDITOR_RESTRICT_BY_USER = True
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
@@ -160,21 +172,20 @@ CKEDITOR_CONFIGS = {
     },
     
 }
+
 AUTH_USER_MODEL = 'users.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 SITE_ID = 1
 
-AWS_S3_ACCESS_KEY_ID=env('AWS_S3_ACCESS_KEY_ID')
-AWS_S3_SECRET_ACCESS_KEY=env('AWS_S3_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME=env('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_FILE_OVERWRITE=False
-AWS_DEFAULT_ACL=None
 
-# production
-# DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage'
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# end production
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+TAILWIND_APP_NAME = 'theme'
+CRISPY_TEMPLATE_PACK = "tailwind"
+CRISPY_CLASS_CONVERTERS = {
+    'textinput': 'dark:text-white text-gray-700'
+}
 
-# local
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# end local
+
+# JET_DEFAULT_THEME = 'light-gray'
+JET_SIDE_MENU_COMPACT = True
+

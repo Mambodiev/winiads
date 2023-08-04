@@ -14,7 +14,7 @@
       <p class="mt-6 text-center text-lg text-gray-700 dark:text-white">
         Or
         {% trans "Don't have an account yet?" %}
-        <a href="{% url 'account_signup' %}" class="font-medium text-blue-500 hover:text-blue-700 ml-2">{% trans "Sign Up Now" %}</a>
+        <a href="{% url 'account_signup' %}" class="font-medium text-blue-700 hover:text-blue-500 ml-2">{% trans "Sign Up Now" %}</a>
       </p>
      <form class="mt-8 space-y-6 text-gray-700 dark:text-white w-full max-w-md" id="signup_form" method="post" action="{% url 'account_login' %}">
       {% csrf_token %}
@@ -24,14 +24,14 @@
       {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
-      <p class="mt-2 text-lg text-blue-500">
-        <a href="{% url 'account_reset_password' %}" class="font-medium text-blue-500 hover:text-blue-500">
+      <p class="mt-2 text-lg text-gray-700">
+        <a href="{% url 'account_reset_password' %}" class="font-medium text-gray-700 hover:text-gray-700">
           {% trans "Forgot Password?" %}
         </a>
       </p>
       <div>
           <button 
-                  class="relative flex justify-center w-full px-4 py-2 text-lg font-medium text-white bg-blue-500   border border-transparent border-solid rounded-md group hover:bg-blue-400">
+                  class="relative flex justify-center w-full px-4 py-2 text-lg font-medium text-white bg-gray-700   border border-transparent border-solid rounded-md group hover:bg-gray-500">
               <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg class="w-5 h-5 text-white-500 group-hover:text-white-400"
                         xmlns="http://www.w3.org/2000/svg"
