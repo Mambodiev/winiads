@@ -8,15 +8,14 @@
 {% block content %}
 
   <div class="w-full max-w-md mx-auto px-4 py-2">
-       <h2 class="mt-6 text-2xl font-extrabold text-center text-gray-700 dark:text-white">
+      <h2 class="mt-6 text-2xl font-extrabold text-center text-gray-700 dark:text-white">
           {% trans "Sign In" %}
       </h2>
       <p class="mt-6 text-center text-lg text-gray-700 dark:text-white">
-        Or
         {% trans "Don't have an account yet?" %}
         <a href="{% url 'account_signup' %}" class="font-medium text-blue-700 hover:text-blue-500 ml-2">{% trans "Sign Up Now" %}</a>
       </p>
-     <form class="mt-8 space-y-6 text-gray-700 dark:text-white w-full max-w-md" id="signup_form" method="post" action="{% url 'account_login' %}">
+      <form class="mt-8 space-y-6 text-gray-700 dark:text-white w-full max-w-md" id="signup_form" method="post" action="{% url 'account_login' %}">
       {% csrf_token %}
 
       {{ form|crispy }}
@@ -46,7 +45,7 @@
               {% trans "Sign In" %}
           </button>
       </div>
-    </form>
+      </form>
   </div>
 {% endblock content %}
 

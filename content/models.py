@@ -10,6 +10,7 @@ import stripe
 from django.utils import timezone
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.html import mark_safe
+from cloudinary.models import CloudinaryField
 
 
 class AutoDateTimeField(models.DateTimeField):
@@ -715,8 +716,8 @@ class Course(models.Model):
     categories = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE)
     # otherShopifyLinks = models.ForeignKey(OtherShopifyLinks, related_name='other_shopify_links',  blank=True, null=True, on_delete=models.PROTECT)
     # OtherAliexpressSuppliersLinks = models.ForeignKey(OtherAliexpressSuppliersLinks, related_name='OtherAliexpressSuppliersLinks',  blank=True, null=True, on_delete=models.PROTECT)
-    product_thumbnail = models.ImageField(blank=True, null=True, upload_to="thumbnails/", default='products/defaut_image_store_light_blue_bag.jpg')
-    store_logo = models.ImageField(blank=True, null=True, upload_to="image_store/",default='products/defaut_image_store.png')
+    product_thumbnail = CloudinaryField('image')
+    store_logo = CloudinaryField('image')
     aliexpress_order = models.IntegerField(default=0, help_text = "Amount of aliexpress order generated")
     countries = models.CharField(max_length=250, blank=True, null=True, choices=countries_choices, default='United States')
     ship_from = models.CharField(max_length=250, blank=True, null=True, choices=ship_from_choices, default='Hong Kong, China')

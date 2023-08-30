@@ -1,6 +1,9 @@
 
 import os
 import environ
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 env = environ.Env()
 environ.Env.read_env()
 from pathlib import Path
@@ -17,8 +20,6 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
-    'jet.dashboard',
-    'jet',
     "django.contrib.admin",
     "django.forms",
     'storages',
@@ -39,6 +40,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     'django_filters',
     'widget_tweaks',
+    'cloudinary',
 ]
 
 INTERNAL_IPS = [
@@ -185,7 +187,9 @@ CRISPY_CLASS_CONVERTERS = {
     'textinput': 'dark:text-white text-gray-700'
 }
 
-
-# JET_DEFAULT_THEME = 'light-gray'
-JET_SIDE_MENU_COMPACT = True
+cloudinary.config( 
+  cloud_name =env('cloud_name_KEY'), 
+  api_key =env('api_key_KEY'),
+  api_secret =env('api_secret_KEY')
+)
 

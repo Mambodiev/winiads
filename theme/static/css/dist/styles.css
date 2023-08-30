@@ -2279,11 +2279,6 @@ select {
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
-:is(.dark .dark\:text-gray-900) {
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
 :is(.dark .dark\:text-green-200) {
   --tw-text-opacity: 1;
   color: rgb(187 247 208 / var(--tw-text-opacity));
