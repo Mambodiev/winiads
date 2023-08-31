@@ -98,13 +98,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #             'keepalives_count':15
 #     }
 # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env('NAME_KEY'),
+        'USER': env('USER_KEY'),
+        'PASSWORD': env('PASSWORD_KEY'),
+        'HOST': env('HOST_KEY'),
     }
 }
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
