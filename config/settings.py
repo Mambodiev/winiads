@@ -9,9 +9,9 @@ environ.Env.read_env()
 from pathlib import Path
 import dj_database_url
 SECRET_KEY =os.environ.get('SECRET_KEY')
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 # ALLOWED_HOSTS = ['.demodjangoblog.herokuapp.com']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['icompeti.onrender.com']
 BASE_DIR = Path(__file__).resolve().parent.parent
 DJANGO_APPS = [
     "django.contrib.auth",
