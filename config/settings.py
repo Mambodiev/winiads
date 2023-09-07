@@ -7,6 +7,7 @@ import cloudinary.api
 env = environ.Env()
 environ.Env.read_env()
 from pathlib import Path
+import dj_database_url
 SECRET_KEY =env('SECRET_KEY')
 DEBUG = True
 # ALLOWED_HOSTS = ['.demodjangoblog.herokuapp.com']
@@ -84,34 +85,9 @@ TEMPLATES = [
     },
 ]
 WSGI_APPLICATION = 'config.wsgi.application'
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'NAME': env('POSTGRES_DB'),
-#             'USER': env('POSTGRES_USER'),
-#             'PASSWORD': env('POSTGRES_PASSWORD'),
-#             'HOST': env('POSTGRES_HOST'),
-#             'PORT': env('POSTGRES_PORT'),
-#             'keepalives':1,
-#             'keepalives_idle':130,
-#             'keepalives_interval':10,
-#             'keepalives_count':15
-#     }
-# }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('NAME_KEY'),
-        'USER': env('USER_KEY'),
-        'PASSWORD': env('PASSWORD_KEY'),
-        'HOST': env('HOST_KEY'),
-    }
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
 AUTH_PASSWORD_VALIDATORS = [
     {
