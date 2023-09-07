@@ -1,14 +1,14 @@
 
 import os
 import environ
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+# import cloudinary
+# import cloudinary.uploader
+# import cloudinary.api
 env = environ.Env()
 environ.Env.read_env()
 from pathlib import Path
 import dj_database_url
-SECRET_KEY =env('SECRET_KEY')
+SECRET_KEY =os.environ.get('SECRET_KEY')
 DEBUG = True
 # ALLOWED_HOSTS = ['.demodjangoblog.herokuapp.com']
 ALLOWED_HOSTS = ['*']
@@ -41,7 +41,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     'django_filters',
     'widget_tweaks',
-    'cloudinary',
+    # 'cloudinary',
 ]
 
 INTERNAL_IPS = [
@@ -171,9 +171,9 @@ CRISPY_CLASS_CONVERTERS = {
     'textinput': 'dark:text-white text-gray-700'
 }
 
-cloudinary.config( 
-  cloud_name =env('cloud_name_KEY'), 
-  api_key =env('api_key_KEY'),
-  api_secret =env('api_secret_KEY')
-)
+# cloudinary.config( 
+#   cloud_name =env('cloud_name_KEY'), 
+#   api_key =env('api_key_KEY'),
+#   api_secret =env('api_secret_KEY')
+# )
 
