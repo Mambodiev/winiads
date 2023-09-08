@@ -1,17 +1,19 @@
 
 import os
 import environ
-# import cloudinary
-# import cloudinary.uploader
-# import cloudinary.api
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 env = environ.Env()
 environ.Env.read_env()
 from pathlib import Path
 import dj_database_url
+
+
 SECRET_KEY =os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
-# ALLOWED_HOSTS = ['.demodjangoblog.herokuapp.com']
-ALLOWED_HOSTS = ['icompeti.onrender.com']
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['icompeti.onrender.com']
 BASE_DIR = Path(__file__).resolve().parent.parent
 DJANGO_APPS = [
     "django.contrib.auth",
@@ -41,7 +43,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     'django_filters',
     'widget_tweaks',
-    # 'cloudinary',
+    'cloudinary',
 ]
 
 INTERNAL_IPS = [
@@ -85,7 +87,12 @@ TEMPLATES = [
     },
 ]
 WSGI_APPLICATION = 'config.wsgi.application'
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
@@ -171,9 +178,9 @@ CRISPY_CLASS_CONVERTERS = {
     'textinput': 'dark:text-white text-gray-700'
 }
 
-# cloudinary.config( 
-#   cloud_name =env('cloud_name_KEY'), 
-#   api_key =env('api_key_KEY'),
-#   api_secret =env('api_secret_KEY')
-# )
+cloudinary.config( 
+  cloud_name =os.environ.get('cloud_name_KEY'), 
+  api_key =os.environ.get('api_key_KEY'),
+  api_secret =os.environ.get('api_secret_KEY')
+)
 

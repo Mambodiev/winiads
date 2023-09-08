@@ -10,7 +10,7 @@ import stripe
 from django.utils import timezone
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.html import mark_safe
-# from cloudinary.models import CloudinaryField
+from cloudinary.models import CloudinaryField
 
 
 class AutoDateTimeField(models.DateTimeField):
@@ -446,7 +446,6 @@ class Course(models.Model):
         ('book test drive', 'Book Test Drive'),
         ('call', 'Call'),
     ]
-
     countries_choices = [
         ('United States', 'United States'),
         ('United Kingdom', 'United Kingdom'),
@@ -714,11 +713,8 @@ class Course(models.Model):
     shopify_links = models.CharField(blank=True, null=True, max_length=500, help_text = "A link that will take to a single the store")
     name_of_store = models.ForeignKey(Store, related_name='store_name', blank=True, null=True, on_delete=models.PROTECT)
     categories = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE)
-    # otherShopifyLinks = models.ForeignKey(OtherShopifyLinks, related_name='other_shopify_links',  blank=True, null=True, on_delete=models.PROTECT)
-    # OtherAliexpressSuppliersLinks = models.ForeignKey(OtherAliexpressSuppliersLinks, related_name='OtherAliexpressSuppliersLinks',  blank=True, null=True, on_delete=models.PROTECT)
-    product_thumbnail = models.ImageField(upload_to="thumbnails/", default='products/defaut_image_store_light_blue_bag.jpg')
-    store_logo = models.ImageField(upload_to="image_store/",default='products/defaut_image_store.png',
-            blank=True)
+    product_thumbnail = CloudinaryField('image', default='https://res.cloudinary.com/dvc5exd3c/image/upload/v1694151185/Image-Coming-Soon_lwf1t8.png')
+    store_logo = CloudinaryField('image', default='https://res.cloudinary.com/dvc5exd3c/image/upload/v1694151185/Image-Coming-Soon_lwf1t8.png')
     aliexpress_order = models.IntegerField(default=0, help_text = "Amount of aliexpress order generated")
     countries = models.CharField(max_length=250, blank=True, null=True, choices=countries_choices, default='United States')
     ship_from = models.CharField(max_length=250, blank=True, null=True, choices=ship_from_choices, default='Hong Kong, China')
@@ -736,18 +732,14 @@ class Course(models.Model):
     facebook_haha = models.IntegerField(default=0, help_text = "Amount of facebook haha")
     facebook_sad = models.IntegerField(default=0, help_text = "Amount of facebook sad")
     facebook_angry = models.IntegerField(default=0, help_text = "Amount of facebook angry")
-    # links_to_ads = RichTextUploadingField(blank=True, null=True,  help_text = "A link that will take to ads")
-    # links_to_others_stores = RichTextUploadingField(blank=True, null=True,help_text = "A link that will take to the store", )
-    # links_to_others_suppliers = RichTextUploadingField(blank=True, null=True,)
+    links_to_ads = RichTextUploadingField(blank=True, null=True,  help_text = "A link that will take to ads")
+    links_to_others_stores = RichTextUploadingField(blank=True, null=True,help_text = "A link that will take to the store", )
+    links_to_others_suppliers = RichTextUploadingField(blank=True, null=True,)
     text_that_comes_with_ads = RichTextUploadingField(blank=True, null=True)
     read_more_text_that_comes_with_ads = RichTextUploadingField(blank=True, null=True)
     number_of_store_selling = models.IntegerField(default=0, help_text = "Amount of store selling the product", blank=True)
     number_of_suppliers_selling= models.IntegerField( default=0, help_text = "Amount of suppliers selling the product")
     created_at = models.DateField(default=timezone.now)
-    # languages = models.ForeignKey(Language,  related_name='languages', blank=True, null=True, on_delete=models.PROTECT)
-    # buttons = models.ForeignKey(Button, related_name='buttons', blank=True, null=True, on_delete=models.PROTECT)
-    # countries = models.ForeignKey(Country, blank=True, null=True, on_delete=models.PROTECT)
-    
     is_faceBook = models.BooleanField(default=False)
     is_pinterest = models.BooleanField(default=False)
     is_tiktok = models.BooleanField(default=False)
