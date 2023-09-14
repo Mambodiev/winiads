@@ -9,6 +9,8 @@ environ.Env.read_env()
 from pathlib import Path
 import dj_database_url
 
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
 
 SECRET_KEY =os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
