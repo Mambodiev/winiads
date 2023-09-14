@@ -12,8 +12,8 @@ import dj_database_url
 
 SECRET_KEY =os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
-ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ['icompeti.onrender.com']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['icompeti.onrender.com']
 BASE_DIR = Path(__file__).resolve().parent.parent
 DJANGO_APPS = [
     "django.contrib.auth",
@@ -53,6 +53,7 @@ INTERNAL_IPS = [
 LOCAL_APPS = [
     "content",
     "users",
+    'core',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 

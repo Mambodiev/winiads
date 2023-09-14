@@ -4,14 +4,16 @@
 {% block title %}{{ user.username }}{% endblock %}
 
 {% block content %}
-  <h1>{{ user.username }}</h1>
-  <form class="form-horizontal" method="post" action="{% url 'users:update' %}">
+<div class="max-w-screen-md py-8 mx-auto">
+  <h1 class='text-center' >{{ user.username }}</h1>
+  <form class="form-horizontal text-center" method="post" action="{% url 'users:update' %}">
     {% csrf_token %}
     {{ form|crispy }}
     <div class="control-group">
       <div class="controls">
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Update</button>
       </div>
     </div>
   </form>
+</div>
 {% endblock %}

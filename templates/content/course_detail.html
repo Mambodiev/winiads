@@ -6,8 +6,8 @@
 {% block content %}
 
 
-    <div class="max-w-screen-xl mx-auto px-4">
-        {% if has_permission %}
+    <div class="max-w-screen-lg mx-auto px-4">
+        {% comment %} {% if has_permission %} {% endcomment %}
         <div class="flex justify-between">
             <div>
                 <h1 class="text-2xl text-gray-700 dark:text-white ">
@@ -41,12 +41,12 @@
             </div>
         </div>
             
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-6 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-2 mb-6">
           <div class="rounded-md shadow-md py-2">
               <img src="{{ object.product_thumbnail.url }}" alt="" class="rounded-lg w-full object-cover">
           </div>
-          <div class="rounded-md shadow-md p-2">
-              <div class="border border-gray-200  dark:border-gray-600 rounded-lg p-2 mb-4 ">
+          <div class="rounded-md shadow-md py-2">
+              <div class=" p-2 mb-4 ">
                   <div class="flex justify-between mb-2">
                     <p class="text-gray-700 dark:text-white ">
                       Ads data
@@ -61,23 +61,23 @@
                         </div>
                     </a>
                   </div>
-                  <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-2">
-                      <div class="flex items-center gap-2 px-4">
+                  <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mb-2">
+                      <div class="flex items-center gap-2">
                           <span class="rounded-full dark:text-white p-1 text-gray-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
                               <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
                             </svg>
                           </span>
     
                         <div>
-                          <p class="text-gray-700 dark:text-white"> {{ object.facebook_like|cool_num }}</p>
+                          <p class="text-gray-700 dark:text-white text-md"> {{ object.facebook_like|cool_num }}</p>
     
                           <p class=" text-gray-700 dark:text-white">Likes</p>
                         </div>
                       </div>
-                      <div class="flex items-center gap-2 px-4">
+                      <div class="flex items-center gap-2">
                         <span class="rounded-full dark:text-white p-1 text-gray-700">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
                             <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                           </svg>
                         </span>
@@ -87,9 +87,9 @@
                           <p class=" text-gray-700 dark:text-white">Comments</p>
                         </div>
                       </div>
-                      <div class="flex items-center gap-2 px-4">
+                      <div class="flex items-center gap-2">
                         <span class="rounded-full dark:text-white p-1 text-gray-700">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                             <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                           </svg>
@@ -106,7 +106,7 @@
               <!-- <div class="flex justify-between ...">
                 <div class="flex items-center gap-2">
                       <span class="rounded-full dark:text-white p-1 text-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
                           <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
                         </svg>
                       </span>
@@ -117,9 +117,9 @@
                       <p class=" text-gray-700 dark:text-white">Likes</p>
                     </div>
                   </div>
-                  <div class="flex items-center gap-2 px-4">
+                  <div class="flex items-center gap-2">
                     <span class="rounded-full dark:text-white p-1 text-gray-700">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
                         <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                       </svg>
                     </span>
@@ -129,9 +129,9 @@
                       <p class=" text-gray-700 dark:text-white">Comments</p>
                     </div>
                   </div>
-                  <div class="flex items-center gap-2 px-4">
+                  <div class="flex items-center gap-2">
                     <span class="rounded-full dark:text-white p-1 text-gray-700">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                         <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                         <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                       </svg>
@@ -145,7 +145,7 @@
                   </div>
               </div> -->
     
-              <div class="border border-gray-200  dark:border-gray-600 rounded-lg p-2 mb-4 ">
+              <div class=" p-2 mb-4 ">
                   <div class="flex justify-between mb-2">
                     <p class="text-gray-700 dark:text-white ">
                       Aliexpress data
@@ -161,9 +161,9 @@
                     </a>
                   </div>
                   <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-2">
-                      <div class="flex items-center gap-2 px-4">
+                      <div class="flex items-center gap-2">
                         <span class="rounded-full dark:text-white p-1 text-gray-700">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
                             <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5ZM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1Zm0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
                           </svg>
                         </span>
@@ -174,9 +174,9 @@
                           <p class=" text-gray-700 dark:text-white">Order</p>
                         </div>
                       </div>
-                      <div class="flex items-center gap-2 px-4">
+                      <div class="flex items-center gap-2">
                         <span class="rounded-full dark:text-white p-1 text-gray-700">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
                             <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
                           </svg>
                         </span>
@@ -187,9 +187,9 @@
                           <p class=" text-gray-700 dark:text-white">Sales</p>
                         </div>
                       </div>
-                      <div class="flex items-center gap-2 px-4">
+                      <div class="flex items-center gap-2">
                         <span class="rounded-full dark:text-white p-1 text-gray-700">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-credit-card-2-back-fill" viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-credit-card-2-back-fill" viewBox="0 0 16 16">
                             <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5H0V4zm11.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zM0 11v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1H0z"/>
                           </svg>
                         </span>
@@ -203,7 +203,7 @@
                   </div>
               </div>
     
-              <div class="border border-gray-200  dark:border-gray-600 rounded-lg p-2 mb-4 ">
+              <div class=" p-2 mb-4 ">
                   <div class="flex justify-between mb-2">
                     <p class="text-gray-700 dark:text-white ">
                       Shopify data
@@ -219,9 +219,9 @@
                     </a>
                   </div>
                   <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-2">
-                      <div class="flex items-center gap-2 px-4">
+                      <div class="flex items-center gap-2">
                         <span class="rounded-full dark:text-white p-1 text-gray-700">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-wallet-fill" viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-wallet-fill" viewBox="0 0 16 16">
                             <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v2h6a.5.5 0 0 1 .5.5c0 .253.08.644.306.958.207.288.557.542 1.194.542.637 0 .987-.254 1.194-.542.226-.314.306-.705.306-.958a.5.5 0 0 1 .5-.5h6v-2A1.5 1.5 0 0 0 14.5 2h-13z"/>
                             <path d="M16 6.5h-5.551a2.678 2.678 0 0 1-.443 1.042C9.613 8.088 8.963 8.5 8 8.5c-.963 0-1.613-.412-2.006-.958A2.679 2.679 0 0 1 5.551 6.5H0v6A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6z"/>
                           </svg>
@@ -233,9 +233,9 @@
                           <p class=" text-gray-700 dark:text-white">Profits</p>
                         </div>
                       </div>
-                      <div class="flex items-center gap-2 px-4">
+                      <div class="flex items-center gap-2">
                         <span class="rounded-full dark:text-white p-1 text-gray-700">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
                             <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
                             <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"/>
@@ -249,9 +249,9 @@
                           <p class=" text-gray-700 dark:text-white">Price</p>
                         </div>
                       </div>
-                      <div class="flex items-center gap-2 px-4">
+                      <div class="flex items-center gap-2">
                         <span class="rounded-full dark:text-white p-1 text-gray-700">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-wallet-fill" viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-wallet-fill" viewBox="0 0 16 16">
                             <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v2h6a.5.5 0 0 1 .5.5c0 .253.08.644.306.958.207.288.557.542 1.194.542.637 0 .987-.254 1.194-.542.226-.314.306-.705.306-.958a.5.5 0 0 1 .5-.5h6v-2A1.5 1.5 0 0 0 14.5 2h-13z"/>
                             <path d="M16 6.5h-5.551a2.678 2.678 0 0 1-.443 1.042C9.613 8.088 8.963 8.5 8 8.5c-.963 0-1.613-.412-2.006-.958A2.679 2.679 0 0 1 5.551 6.5H0v6A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6z"/>
                           </svg>
@@ -259,7 +259,7 @@
     
                         <div>
     
-                          <p class="text-gray-700 dark:text-white">${{ object.aliexpress_total_sale|cool_num }}</p>
+                          <p class="text-gray-700 dark:text-white text-md">${{ object.aliexpress_total_sale|cool_num }}</p>
     
                           <p class=" text-gray-700 dark:text-white">Store</p>
                         </div>
@@ -269,7 +269,7 @@
           </div>
           <div class="rounded-md shadow-md p-2">
               <div class="col-span-2 text-gray-700 dark:text-white">
-                  <div class="border border-gray-200  dark:border-gray-600 rounded-lg p-2 mb-4 ">
+                  <div class=" p-2 mb-4 ">
                       <div class="flex justify-between mb-2">
                           <p class="text-gray-700 dark:text-white ">
                             Ads text
@@ -337,7 +337,7 @@
                             </script>
                        </div>
                   </div>
-                  <div class="border border-gray-200  dark:border-gray-600 rounded-lg p-2 mb-4 ">
+                  <div class=" p-2 mb-4 ">
                       <div class="flex justify-between my-2">
                         <p class=" text-gray-700 dark:text-white ">
                           Informations
@@ -619,7 +619,7 @@
                       <div class="grid grid-cols-3 text-gray-700 dark:text-gray-200 gap-2 ">
                           <div class="flex flex-col justify-start p-2">
                               <p class="flex text-lg font-medium">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-hand-thumbs-up-fill mr-2" viewBox="0 0 16 16">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-hand-thumbs-up-fill mr-2" viewBox="0 0 16 16">
                                       <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
                                   </svg>
                                   {{ course.first_related_post.facebook_like|cool_num }}
@@ -627,7 +627,7 @@
                           </div>
                           <div class="flex flex-col justify-start p-2">
                               <p class="flex text-lg font-medium">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots-fill mr-2" viewBox="0 0 16 16">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chat-dots-fill mr-2" viewBox="0 0 16 16">
                                       <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                                   </svg>
                                   {{ course.first_related_post.facebook_comment|cool_num }}
@@ -635,7 +635,7 @@
                           </div>
                           <div class="flex flex-col justify-start p-2">
                               <p class="flex text-lg font-medium">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-fill mr-2" viewBox="0 0 16 16">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye-fill mr-2" viewBox="0 0 16 16">
                                       <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                                       <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                                   </svg>
@@ -711,7 +711,7 @@
                       <div class="grid grid-cols-3 text-gray-700 dark:text-gray-200 gap-2 ">
                           <div class="flex flex-col justify-start p-2">
                               <p class="flex text-lg font-medium">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-hand-thumbs-up-fill mr-2" viewBox="0 0 16 16">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-hand-thumbs-up-fill mr-2" viewBox="0 0 16 16">
                                       <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
                                   </svg>
                                   {{ course.second_related_post.facebook_like|cool_num }}
@@ -719,7 +719,7 @@
                           </div>
                           <div class="flex flex-col justify-start p-2">
                               <p class="flex text-lg font-medium">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots-fill mr-2" viewBox="0 0 16 16">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chat-dots-fill mr-2" viewBox="0 0 16 16">
                                       <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                                   </svg>
                                   {{ course.second_related_post.facebook_comment|cool_num }}
@@ -727,7 +727,7 @@
                           </div>
                           <div class="flex flex-col justify-start p-2">
                               <p class="flex text-lg font-medium">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-fill mr-2" viewBox="0 0 16 16">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye-fill mr-2" viewBox="0 0 16 16">
                                       <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                                       <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                                   </svg>
@@ -803,7 +803,7 @@
                       <div class="grid grid-cols-3 text-gray-700 dark:text-gray-200 gap-2 ">
                           <div class="flex flex-col justify-start p-2">
                               <p class="flex text-lg font-medium">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-hand-thumbs-up-fill mr-2" viewBox="0 0 16 16">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-hand-thumbs-up-fill mr-2" viewBox="0 0 16 16">
                                       <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
                                   </svg>
                                   {{ course.third_related_post.facebook_like|cool_num }}
@@ -811,7 +811,7 @@
                           </div>
                           <div class="flex flex-col justify-start p-2">
                               <p class="flex text-lg font-medium">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots-fill mr-2" viewBox="0 0 16 16">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chat-dots-fill mr-2" viewBox="0 0 16 16">
                                       <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                                   </svg>
                                   {{ course.third_related_post.facebook_comment|cool_num }}
@@ -819,7 +819,7 @@
                           </div>
                           <div class="flex flex-col justify-start p-2">
                               <p class="flex text-lg font-medium">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye-fill mr-2" viewBox="0 0 16 16">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye-fill mr-2" viewBox="0 0 16 16">
                                       <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                                       <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                                   </svg>
@@ -832,9 +832,9 @@
           {% endif %}
         </div>
 
-        {% else %}
+        {% comment %} {% else %}
             <p class='text-center mx-auto text-lg'>You do not have permission to view this course. Upgrade your subscription to start</p>
-        {% endif %}
+        {% endif %} {% endcomment %}
 
 
     </div>

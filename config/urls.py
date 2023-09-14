@@ -26,7 +26,7 @@ urlpatterns = [
     path("users/", include("users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     path("payments/", include("payment.urls")),
-    path('contact/', views.ContactView.as_view(), name='contact'),
+    path("core/", include("core.urls")),
     
     # tailwind things
     path("__reload__/", include("django_browser_reload.urls")),
