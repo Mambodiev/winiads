@@ -18,7 +18,7 @@
               </a>
           </p>
         </div>
-        <form class="mt-8 space-y-6" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        <form class="mt-8 space-y-6 w-full max-w-md mx-auto" id="signup_form" method="post" action="{% url 'account_signup' %}">
           {% csrf_token %}
 
           {{ form|crispy }}

@@ -5,43 +5,22 @@
 
 {% block content %}
 <div class="max-w-screen-md py-8 mx-auto">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-
-        <h2>{{ object.username }}</h2>
-        {% if object.name %}
-          <p>{{ object.name }}</p>
-        {% endif %}
-      </div>
-    </div>
+    <h2 class="text-center">{{ object.username }}</h2>
     {% if object == request.user %}
-    <div class="row">
+    <div class="flex justify-center my-6 gap-6">
 
-      <div class="col-sm-12">
-        <a class="w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" href="{% url 'users:update' %}" role="button">My Info</a>
-        <a class="w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" href="{% url 'account_email' %}" role="button">E-Mail</a>
-        <a class="w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" href="{% url 'users:subscription' request.user.username %}" role="button">My subscription</a>
-        <!-- Your Stuff: Custom user template urls -->
-      </div>
+      <a href="{% url 'users:update' %}"  class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">My Info
+      </a>
 
-      <div class="flex justify-center my-6 gap-6">
-
-        <a href="{% url 'users:update' %}"  class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">My Info
-        </a>
-
-        <a href="{% url 'account_email' %}" class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">E-Mail
-        </a>
+      <a href="{% url 'account_email' %}" class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">E-Mail
+      </a>
 
 
-        <a href="{% url 'users:subscription' request.user.username %}" class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">My subscription
-        </a>
-
-      </div>
+      <a href="{% url 'users:subscription' request.user.username %}" class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">My subscription
+      </a>
 
     </div>
     {% endif %}
-  </div>
 </div>
 {% endblock content %}
 

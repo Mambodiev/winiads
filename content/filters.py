@@ -187,6 +187,23 @@ class CourseFilter(django_filters.FilterSet):
         ('Argentina', 'Argentina'),
         ('Mexico', 'Mexico'),
     ]
+    categories_choices = [
+        ('Tools & Home Improvement', 'tools & home improvement'),
+        ("Women's Fashion", "women's fashion"),
+        ("Men's Fashion", "men's fashion"),
+        ('Phones & Telecommunications', 'phones & telecommunications'),
+        ('Computer, Office & Security', 'computer, office & security'),
+        ('Consumer Electronics', 'consumer electronics'),
+        ('Jewelry & Watches', 'jewelry & watches'),
+        ('Home, Pet & Appliances', 'home, pet & appliances'),
+        ('Bags & Shoes', 'bags & shoes'),
+        ('Toys , Kids & Babies', 'toys , kids & babies'),
+        ('Outdoor Fun & Sports', 'outdoor fun & sports'),
+        ('Beauty, Health & Hair', 'beauty, health & hair'),
+        ('Automobiles & Motorcycles', 'automobiles & motorcycles'),
+        ('Home & Garden', 'home & garden'),
+        ('Sports & Entertainment', 'sports & entertainment')
+    ]
     ship_from_choices = [
         ('Afghanistan', 'Afghanistan'),
         ('Aland Islands', 'Aland Islands'),
@@ -489,6 +506,7 @@ class CourseFilter(django_filters.FilterSet):
     button = django_filters.ChoiceFilter(field_name='button', choices=option_button, empty_label = 'All', initial='All')
     gender = django_filters.ChoiceFilter(field_name='gender', choices=gender_options, empty_label= 'All', initial='All')
     technology = django_filters.ChoiceFilter(field_name='technology', choices=technology_options, empty_label ='All', initial='All')
+    categories = django_filters.ChoiceFilter(field_name='categories', choices=categories_choices, empty_label ='All', initial='All')
     countries = django_filters.ChoiceFilter(field_name='countries', choices=country_choices, empty_label ='All', initial='All')
     ship_from = django_filters.ChoiceFilter(field_name='ship_from', choices=ship_from_choices, empty_label ='All', initial='All')
     language = django_filters.ChoiceFilter(field_name='language', choices=option_language, empty_label ='All', initial='All') 
@@ -534,7 +552,7 @@ class CourseFilter(django_filters.FilterSet):
             'name':['icontains'],
         }
         
-        fields =  ['site_type', 'created_at__gt', 'created_at__lt', 'facebook_like__gt',  'facebook_like__lt', 'aliexpress_price__gt', 'aliexpress_price__lt', 'ads_type', 'facebook_comment__gt', 'facebook_comment__lt','age__gt', 'age__lt', 'gender', 'technology', 'countries', 'ship_from', 'language', 'button']
+        fields =  ['site_type', 'created_at__gt', 'created_at__lt', 'facebook_like__gt',  'facebook_like__lt', 'aliexpress_price__gt', 'aliexpress_price__lt', 'ads_type', 'facebook_comment__gt', 'facebook_comment__lt','age__gt', 'age__lt', 'categories', 'gender', 'technology', 'countries', 'ship_from', 'language', 'button']
         
     
     def filter_by_order(self, queryset, name, value):

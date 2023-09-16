@@ -1,17 +1,18 @@
 from django.views import generic
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, reverse, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django_filters.views import FilterView
 
-from .models import Course, Video, City
+from .models import Course, Video, City, OrderItem
 from .mixins import CoursePermissionMixin
 from .filters import CourseFilter 
 from django.core.paginator import EmptyPage, Paginator, PageNotAnInteger
 from django.http import JsonResponse
-from .forms import ContactForm
+from .forms import ContactForm, AddToCartForm
+from .utils import get_or_set_order_session
 
-class CourseListView(LoginRequiredMixin, FilterView):
+class CourseListView(FilterView):
     
     model = Course
     filterset_class = CourseFilter
@@ -19,25 +20,56 @@ class CourseListView(LoginRequiredMixin, FilterView):
     paginate_by = 6
     
 
-class CourseDetailView(LoginRequiredMixin, generic.DetailView):
+class CourseDetailView(generic.FormView):
     template_name = "content/course_detail.html"
-    queryset = Course.objects.all()
-
+    model = Course
+    form_class = AddToCartForm
+    # queryset = Course.objects.all()
     
-    def get_context_data(self, **kwargs):
-        context = super(CourseDetailView, self).get_context_data(**kwargs)
-        course = self.get_course()
-        subscription = self.request.user.subscription
-        pricing_tier = subscription.pricing
-        subscription_is_active = subscription.status == "active" or subscription.status == "trialing" 
+    def get_object(self):
+        return get_object_or_404(Course, slug=self.kwargs["slug"])
+    
+    def get_success_url(self):
+        return reverse("content:summary")
+    
+    def form_valid(self, form):
+        order = get_or_set_order_session(self.request)
+        course = self.get_object()
+
+        item_filter = order.items.filter(course=course)
+
+        if item_filter.exists():
+            item = item_filter.first()
+            item.quantity = int(form.cleaned_data['quantity'])
+            item.save()
+
+        else:
+            new_item = form.save(commit=False)
+            new_item.course = course
+            new_item.order = order
+            new_item.save()
+
+        return super(CourseDetailView, self).form_valid(form)
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super(CourseDetailView, self).get_context_data(**kwargs)
+    #     course = self.get_course()
+    #     subscription = self.request.user.subscription
+    #     pricing_tier = subscription.pricing
+    #     subscription_is_active = subscription.status == "active" or subscription.status == "trialing" 
                 
-        context.update({
-            "has_permission": pricing_tier in course.pricing_tiers.all() and subscription_is_active
-        })
-        return context
+    #     context.update({
+    #         "has_permission": pricing_tier in course.pricing_tiers.all() and subscription_is_active
+    #     })
+    #     return context
     
     def get_course(self):
         return get_object_or_404(Course, slug=self.kwargs["slug"])
+    
+    def get_context_data(self, **kwargs):
+        context = super(CourseDetailView, self).get_context_data(**kwargs)
+        context['course'] = self.get_object()
+        return context
     
 def product_chart(request):
     labels = []
@@ -80,6 +112,15 @@ class VideoDetailView(LoginRequiredMixin, generic.DetailView):
         course = self.get_course()
         return course.videos.all()
     
+
+class CourseView(generic.TemplateView):
+    template_name = "content/course_view.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(CourseView, self).get_context_data(**kwargs)
+        context["order"] = get_or_set_order_session(self.request)
+        return context
+    
     
 class ContactView(generic.FormView):
     form_class = ContactForm
@@ -108,3 +149,10 @@ class ContactView(generic.FormView):
             recipient_list=[settings.NOTIFY_EMAIL]
         )
         return super(ContactView, self).form_valid(form)
+
+
+class RemoveFromCourseView(generic.View):
+    def get(self, request, *args, **kwargs):
+        order_item = get_object_or_404(OrderItem, id=kwargs['pk'])
+        order_item.delete()
+        return redirect("content:summary")

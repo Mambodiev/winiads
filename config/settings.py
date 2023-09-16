@@ -14,8 +14,8 @@ mimetypes.add_type("text/css", ".css", True)
 
 SECRET_KEY =os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
-# ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['icompeti.onrender.com']
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['icompeti.onrender.com']
 BASE_DIR = Path(__file__).resolve().parent.parent
 DJANGO_APPS = [
     "django.contrib.auth",
@@ -91,11 +91,11 @@ TEMPLATES = [
 ]
 WSGI_APPLICATION = 'config.wsgi.application'
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+#      'default': {
+#          'ENGINE': 'django.db.backends.sqlite3',
+#          'NAME': BASE_DIR / 'db.sqlite3',
+#      }
+#  }
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }

@@ -480,6 +480,24 @@ class Course(models.Model):
         ('Argentina', 'Argentina'),
         ('Mexico', 'Mexico'),
     ]
+    categories_choices = (
+        ('Tools & Home Improvement', 'tools & home improvement'),
+        ("Women's Fashion", "women's fashion"),
+        ("Men's Fashion", "men's fashion"),
+        ('Phones & Telecommunications', 'phones & telecommunications'),
+        ('Computer, Office & Security', 'computer, office & security'),
+        ('Consumer Electronics', 'consumer electronics'),
+        ('Jewelry & Watches', 'jewelry & watches'),
+        ('Home, Pet & Appliances', 'home, pet & appliances'),
+        ('Bags & Shoes', 'bags & shoes'),
+        ('Toys , Kids & Babies', 'toys , kids & babies'),
+        ('Outdoor Fun & Sports', 'outdoor fun & sports'),
+        ('Beauty, Health & Hair', 'beauty, health & hair'),
+        ('Automobiles & Motorcycles', 'automobiles & motorcycles'),
+        ('Home & Garden', 'home & garden'),
+        ('Sports & Entertainment', 'sports & entertainment')
+        
+    )
     ship_from_choices = [
         ('Afghanistan', 'Afghanistan'),
         ('Aland Islands', 'Aland Islands'),
@@ -713,10 +731,11 @@ class Course(models.Model):
     shopify_links = models.CharField(blank=True, null=True, max_length=500, help_text = "A link that will take to a single the store")
     name_of_store = models.ForeignKey(Store, related_name='store_name', blank=True, null=True, on_delete=models.PROTECT)
     categories = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE)
-    product_thumbnail = CloudinaryField('image', default='https://res.cloudinary.com/dvc5exd3c/image/upload/v1694151185/Image-Coming-Soon_lwf1t8.png')
-    store_logo = CloudinaryField('image', default='https://res.cloudinary.com/dvc5exd3c/image/upload/v1694151185/Image-Coming-Soon_lwf1t8.png')
+    product_thumbnail = CloudinaryField('image', default='https://res.cloudinary.com/dvc5exd3c/image/upload/v1694866008/Image-Coming-Soon_rsuykv.png')
+    video_links = models.CharField(max_length=500, blank=True, null=True)
     aliexpress_order = models.IntegerField(default=0, help_text = "Amount of aliexpress order generated")
     countries = models.CharField(max_length=250, blank=True, null=True, choices=countries_choices, default='United States')
+    categories = models.CharField(max_length=250, blank=True, null=True, choices=categories_choices, default='tools & home improvement')
     ship_from = models.CharField(max_length=250, blank=True, null=True, choices=ship_from_choices, default='Hong Kong, China')
     ads_type = models.CharField(max_length=250, blank=True, null=True, choices=option_ads_type, default='video')
     gender = models.CharField(max_length=250, blank=True, null=True, choices=gender_options, default='male or Female')
@@ -744,7 +763,7 @@ class Course(models.Model):
     is_pinterest = models.BooleanField(default=False)
     is_tiktok = models.BooleanField(default=False)
     has_video = models.BooleanField(default=False)
-    has_photo = models.BooleanField(default=False)
+    has_photo = models.BooleanField(default=True)
     price_margin = models.DecimalField(default=0, max_digits=10, decimal_places=2, help_text = "Profit you get from this product")
     updated_at = AutoDateTimeField(default=timezone.now)
     aliexpress_total_sale = models.DecimalField(default=0, max_digits=10, decimal_places=2, help_text = "Amount of aliexpress sale generated")
@@ -793,8 +812,6 @@ class Course(models.Model):
     img_preview.short_description = 'Product Image'
     img_preview.allow_tags = True
 
-    class Meta:
-        ordering = ['-id']
 
     def __str__(self):
         return self.name_of_product
@@ -804,7 +821,18 @@ class Course(models.Model):
 
     class Meta:
             verbose_name_plural = "1. Courses" 
+            ordering = ["-updated_at"]
 
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(
+        "Order", related_name='items', on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    updated_at = AutoDateTimeField(default=timezone.now)
+
+    
+    
 class OtherShopifyLinks(models.Model):
     course = models.ForeignKey(Course, on_delete=models.PROTECT)
     link =models.CharField(blank=True, null=True, max_length=500, help_text = "A link that will take to a single the Other Shopify Links")

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from . import models
-from .models import Course, Video, Pricing, Subscription, OtherShopifyLinks,OtherAliexpressSuppliersLinks, Category, Store, Country, Gender, Age, Like, Order, AliexpressOrderGrowth, City
+from .models import Course, Video, Pricing, Subscription, OtherShopifyLinks,OtherAliexpressSuppliersLinks, Category, Store, Country, Gender, Age, Like, Order, AliexpressOrderGrowth, City, OrderItem
 
 
 
@@ -78,3 +78,4 @@ admin.site.register(Video)
 admin.site.register(Pricing)
 admin.site.register(Subscription)
 admin.site.register(City, CityAdmin)
+admin.site.register(OrderItem)
