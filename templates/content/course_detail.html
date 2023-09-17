@@ -46,16 +46,16 @@
             
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-2 mb-6">
           <div class="flex items-center justify-center rounded-md shadow-md py-2">
-              {% if course.has_video %}
-                  <button
-                      class="absolute bg-gray-800 bg-opacity-30 hover:bg-opacity-30 p-4 rounded-full text-gray-200 hover:bg-white hover:text-gray-800">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
-                          <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
-                      </svg>
-                  </button>
-              {% endif %}
+              
               {% comment %} <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="" class="rounded-lg w-full object-cover">{% endcomment %}
-              <img src="{{ course.product_thumbnail.url }}" alt="" class="rounded-lg w-full object-cover"> 
+              {% if course.has_video %}
+                <video class="w-full h-auto max-w-full" controls>
+                  <source src="{{ course.video_links }}" type="video/mp4">
+                </video>
+              {% endif %}
+              {% if course.has_photo %}
+                <img src="{{ course.product_thumbnail.url }}" alt="" class="rounded-lg w-full object-cover"> 
+              {% endif %}
           </div>
           <div class="rounded-md shadow-md py-2">
               <div class=" p-2 mb-4 ">
