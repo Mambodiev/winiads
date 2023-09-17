@@ -25,6 +25,7 @@ class CourseFilter(django_filters.FilterSet):
         ('buy now', 'Buy Now'),
         ('shop now', 'Shop Now'),
         ('learn more', 'Learn More'),
+        ('Grab Yours', 'Grab Yours'),
         ('sign up', 'Sign Up'),
         ('send message', 'Send Message'),
         ('book now', 'Book Now'),

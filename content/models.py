@@ -377,6 +377,7 @@ class Course(models.Model):
         ('buy now', 'Buy Now'),
         ('shop now', 'Shop Now'),
         ('learn more', 'Learn More'),
+        ('Grab Yours', 'Grab Yours'),
         ('sign up', 'Sign Up'),
         ('send message', 'Send Message'),
         ('book now', 'Book Now'),
@@ -745,15 +746,16 @@ class Course(models.Model):
     technology = models.CharField(max_length=250, blank=True, null=True, choices=technologies_choices, default='shopify')
     language= models.CharField(max_length=250, blank=True, null=True, choices=option_language, default='english')
     button = models.CharField(max_length=250, blank=True, null=True, choices=option_button, default='buy now')
-    facebook_shares = models.IntegerField(blank=True, null=True, default=0, help_text = "Amount of shares generated")
-    facebook_comment = models.IntegerField(default=0, help_text = "Amount of comment generated")
-    facebook_views = models.IntegerField(default=0, help_text = "Amount of views generated")
     facebook_like = models.IntegerField(default=0, help_text = "Amount of facebook like")
-    facebook_wow = models.IntegerField(default=0, help_text = "Amount of facebook wow")
+    facebook_comment = models.IntegerField(default=0, help_text = "Amount of comment generated")
+    facebook_shares = models.IntegerField(blank=True, null=True, default=0, help_text = "Amount of shares generated")
+    facebook_views = models.IntegerField(default=0, help_text = "Amount of views generated")
     facebook_love = models.IntegerField(default=0, help_text = "Amount of facebook love")
+    facebook_wow = models.IntegerField(default=0, help_text = "Amount of facebook wow")
+    facebook_care = models.IntegerField(default=0, help_text = "Amount of facebook care")
+    facebook_angry = models.IntegerField(default=0, help_text = "Amount of facebook angry")
     facebook_haha = models.IntegerField(default=0, help_text = "Amount of facebook haha")
     facebook_sad = models.IntegerField(default=0, help_text = "Amount of facebook sad")
-    facebook_angry = models.IntegerField(default=0, help_text = "Amount of facebook angry")
     # links_to_others_stores = RichTextUploadingField(blank=True, null=True,help_text = "A link that will take to the store", )
     # links_to_others_suppliers = RichTextUploadingField(blank=True, null=True,)
     text_that_comes_with_ads = RichTextUploadingField(blank=True, null=True)
