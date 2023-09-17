@@ -32,6 +32,9 @@ class Pricing(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "6 Pricings"
+
 
 class Subscription(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -46,6 +49,9 @@ class Subscription(models.Model):
     @property
     def is_active(self):
         return self.status == "active" or self.status == "trialing"
+
+    class Meta:
+        verbose_name_plural = "3 Subscriptions"
 
 
 class Category(models.Model):
@@ -200,15 +206,7 @@ class Country(models.Model):
 
     
 
-class Store(models.Model):
-    name = models.CharField(max_length=100)
-    created_at = models.DateField(default=timezone.now)
-    updated_at = AutoDateTimeField(default=timezone.now)    
-        
-    def __str__(self):
-        return self.name
-    class Meta:
-        verbose_name_plural = "1. Stores" 
+
 
 class Order(models.Model):
     user = models.ForeignKey(
@@ -231,6 +229,10 @@ class Course(models.Model):
         (0, 'facebook'),
         (1, 'instagram'),
         (2, 'pinterest'),
+    )
+    draft_options = (
+        ('draft', 'Draft'),
+        ('published', 'Published'),
     )
     technologies_choices = [
         ('shopify', 'Shopify'),
@@ -728,11 +730,12 @@ class Course(models.Model):
     slug = models.SlugField(unique=True)
     shopify_price = models.DecimalField(max_digits=10, decimal_places=2, help_text = "Product price from shopify")
     aliexpress_price = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2, help_text = "Product price from aliexpress")
-    shopify_links = models.CharField(blank=True, null=True, max_length=500, help_text = "A link that will take to a single the store")
-    name_of_store = models.ForeignKey(Store, related_name='store_name', blank=True, null=True, on_delete=models.PROTECT)
+    shopify_links = models.TextField(blank=True, null=True, help_text = "A link that will take to a single the store")
+    links_to_ads = models.TextField(blank=True, null=True, help_text = "A link that will take to ads")
+    # name_of_store = models.ForeignKey(Store, related_name='store_name', blank=True, null=True, on_delete=models.PROTECT)
     categories = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE)
     product_thumbnail = CloudinaryField('image', default='https://res.cloudinary.com/dvc5exd3c/image/upload/v1694866008/Image-Coming-Soon_rsuykv.png')
-    video_links = models.CharField(max_length=500, blank=True, null=True)
+    video_links = models.TextField( blank=True, null=True)
     aliexpress_order = models.IntegerField(default=0, help_text = "Amount of aliexpress order generated")
     countries = models.CharField(max_length=250, blank=True, null=True, choices=countries_choices, default='United States')
     categories = models.CharField(max_length=250, blank=True, null=True, choices=categories_choices, default='tools & home improvement')
@@ -751,9 +754,8 @@ class Course(models.Model):
     facebook_haha = models.IntegerField(default=0, help_text = "Amount of facebook haha")
     facebook_sad = models.IntegerField(default=0, help_text = "Amount of facebook sad")
     facebook_angry = models.IntegerField(default=0, help_text = "Amount of facebook angry")
-    links_to_ads = RichTextUploadingField(blank=True, null=True,  help_text = "A link that will take to ads")
-    links_to_others_stores = RichTextUploadingField(blank=True, null=True,help_text = "A link that will take to the store", )
-    links_to_others_suppliers = RichTextUploadingField(blank=True, null=True,)
+    # links_to_others_stores = RichTextUploadingField(blank=True, null=True,help_text = "A link that will take to the store", )
+    # links_to_others_suppliers = RichTextUploadingField(blank=True, null=True,)
     text_that_comes_with_ads = RichTextUploadingField(blank=True, null=True)
     read_more_text_that_comes_with_ads = RichTextUploadingField(blank=True, null=True)
     number_of_store_selling = models.IntegerField(default=0, help_text = "Amount of store selling the product", blank=True)
@@ -764,6 +766,7 @@ class Course(models.Model):
     is_tiktok = models.BooleanField(default=False)
     has_video = models.BooleanField(default=False)
     has_photo = models.BooleanField(default=True)
+    product_status = models.CharField(max_length=10, choices=draft_options, default='draft')
     price_margin = models.DecimalField(default=0, max_digits=10, decimal_places=2, help_text = "Profit you get from this product")
     updated_at = AutoDateTimeField(default=timezone.now)
     aliexpress_total_sale = models.DecimalField(default=0, max_digits=10, decimal_places=2, help_text = "Amount of aliexpress sale generated")
@@ -834,25 +837,300 @@ class OrderItem(models.Model):
     
     
 class OtherShopifyLinks(models.Model):
+    countries_choices = [
+        ('United States', 'United States'),
+        ('United Kingdom', 'United Kingdom'),
+        ('Canada', 'Canada'),
+        ('Australia', 'Australia'),
+        ('New Zealand', 'New Zealand'),
+        ('Sweden', 'Sweden'),
+        ('Denmark', 'Denmark'),
+        ('Iceland', 'Iceland'),
+        ('Norway', 'Norway'),
+        ('Finland', 'Finland'),
+        ('The Netherlands', 'The Netherlands'),
+        ('Ireland', 'Ireland'),
+        ('Germany', 'Germany'),
+        ('South Korea', 'South Korea'),
+        ('Switzerland', 'Switzerland'),
+        ('Belgium', 'Belgium'),
+        ('Israel', 'Israel'),
+        ('Italy', 'Italy'),
+        ('France', 'France'),
+        ('Spain', 'Spain'),
+        ('Portugal', 'Portugal'),
+        ('Austria', 'Austria'),
+        ('Hungary', 'Hungary'),
+        ('Poland', 'Poland'),
+        ('Czech Republic', 'Czech Republic'),
+        ('UAE', 'UAE'),
+        ('South Africa', 'South Africa'),
+        ('The Philippines', 'The Philippines'),
+        ('Japan', 'Japan'),
+        ('Singapore', 'Singapore'),
+        ('Argentina', 'Argentina'),
+        ('Mexico', 'Mexico'),
+    ]
     course = models.ForeignKey(Course, on_delete=models.PROTECT)
     link =models.CharField(blank=True, null=True, max_length=500, help_text = "A link that will take to a single the Other Shopify Links")
     name = models.CharField(max_length=100)   
+    countries = models.CharField(max_length=250, blank=True, null=True, choices=countries_choices, default='United States')
     created_at = models.DateField(default=timezone.now)
     updated_at = AutoDateTimeField(default=timezone.now) 
     class Meta:
-        verbose_name_plural = "Other Shopify Links"
+        verbose_name_plural = "3 Other Shopify Links"
     def __str__(self):
         return self.name
-    
+
+class Store(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.PROTECT, blank=True, null=True,)
+    name = models.CharField(max_length=100)
+    store_links =models.TextField(blank=True, null=True, help_text = "link that will take to ads")
+    created_at = models.DateField(default=timezone.now)
+    updated_at = AutoDateTimeField(default=timezone.now)    
+        
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name_plural = "2. Stores" 
+
+
     
 class OtherAliexpressSuppliersLinks(models.Model):
+    supply_country_choices = [
+        ('Hong Kong, China', 'Hong Kong, China'),
+        ('Afghanistan', 'Afghanistan'),
+        ('Aland Islands', 'Aland Islands'),
+        ('Albania', 'Albania'),
+        ('Aldemey', 'Aldemey'),
+        ('Algeria', 'Algeria'),
+        ('American Samoa', 'American Samoa'),
+        ('Andorra', 'Andorra'),
+        ('Angola', 'Angola'),
+        ('Anguilla', 'Anguilla'),
+        ('Antigua and Barbuda', 'Antigua and Barbuda'),
+        ('Argentina', 'Argentina'),
+        ('Armemia', 'Armemia'),
+        ('Aruba', 'Aruba'),
+        ('Ascension Island', 'Ascension Island'),
+        ('Australia', 'Australia'),
+        ('Austria', 'Austria'),
+        ('Azerbaijan', 'Azerbaijan'),
+        ('Bahamas', 'Bahamas'),
+        ('Bahrain', 'Bahrain'),
+        ('Bangladesh', 'Bangladesh'),
+        ('Barbados', 'Barbados'),
+        ('Belarus', 'Belarus'),
+        ('Belgium', 'Belgium'),
+        ('Belize', 'Belize'),
+        ('Benin', 'Benin'),
+        ('Bermuda', 'Bermuda'),
+        ('Bhutan', 'Bhutan'),
+        ('Bolivia', 'Bolivia'),
+        ('Bosnia and Herzegovina', 'Bosnia and Herzegovina'),
+        ('Botswana', 'Botswana'),
+        ('Brazil', 'Brazil'),
+        ('Virgin Islands(British)', 'Virgin Islands(British)'),
+        ('Brunei', 'Brunei'),
+        ('Bulgaria', 'Bulgaria'),
+        ('Burkina Faso', 'Burkina Faso'),
+        ('Burundi', 'Burundi'),
+        ('Cambodia', 'Cambodia'),
+        ('Cameroon', 'Cameroon'),
+        ('Canada', 'Canada'),
+        ('Cap Verte', 'Cap Verte'),
+        ('Caribbean Netherlands', 'Caribbean Netherlands'),
+        ('Cayman Islands', 'Cayman Islands'),
+        ('Cental African Republic', 'Cental African Republic'),
+        ('Chad', 'Chad'),
+        ('Chile', 'Chile'),
+        ('Christmas Island', 'Christmas Island'),
+        ('Cocos (Keeling) Islands', 'Cocos (Keeling) Islands'),
+        ('Colombia', 'Colombia'),
+        ('Comoros', 'Comoros'),
+        ('Congo, Democratic Republic of the', 'Congo, Democratic Republic of the'),
+        ('Costa Rica', 'Costa Rica'),
+        ('Côte d’Ivoire', 'Côte d’Ivoire'),
+        ('Croatia', 'Croatia'),
+        ('Curacao', 'Curacao'),
+        ('Cyprus', 'Cyprus'),
+        ('Czech Republic', 'Czech Republic'),
+        ('Denmark', 'Denmark'),
+        ('Djibouti', 'Djibouti'),
+        ('Dominica Dominican Republic', 'Dominica Dominican Republic'),
+        ('East Timor (Timor-Leste)', 'East Timor (Timor-Leste)'),
+        ('Ecuador', 'Ecuador'),
+        ('Egypt', 'Egypt'),
+        ('El Salvador', 'El Salvador'),
+        ('Equatorial Guinea', 'Equatorial Guinea'),
+        ('Eritrea', 'Eritrea'),
+        ('Estonia', 'Estonia'),
+        ('Ethiopia', 'Ethiopia'),
+        ('Falkand Islands(Malvinas)', 'Falkand Islands(Malvinas)'),
+        ('Faroe Islands', 'Faroe Islands'),
+        ('Fiji', 'Fiji'),
+        ('Finland', 'Finland'),
+        ('France', 'France'),
+        ('Gabon', 'Gabon'),
+        ('The Gambia', 'The Gambia'),
+        ('Georgia', 'Georgia'),
+        ('Germany', 'Germany'),
+        ('Gibraltar', 'Gibraltar'),
+        ('Greece', 'Greece'),
+        ('Grenada', 'Grenada'),
+        ('Guan', 'Guan'),
+        ('Guatemala', 'Guatemala'),
+        ('Guernsey', 'Guernsey'),
+        ('Guinea', 'Guinea'),
+        ('Guinea-Bissau', 'Guinea-Bissau'),
+        ('Guyana', 'Guyana'),
+        ('French Guyana', 'French Guyana'),
+        ('Haiti', 'Haiti'),
+        ('Honduras', 'Honduras'),
+        ('Hungary', 'Hungary'),
+        ('Iceland', 'Iceland'),
+        ('India', 'India'),
+        ('Indonesia', 'Indonesia'),
+        ('Iraq', 'Iraq'),
+        ('Ireland', 'Ireland'),
+        ('Israel', 'Israel'),
+        ('Italy', 'Italy'),
+        ('Jamaica', 'Jamaica'),
+        ('Japan', 'Japan'),
+        ('Jersey', 'Jersey'),
+        ('Jordan', 'Jordan'),
+        ('Kazakhstan', 'Kazakhstan'),
+        ('Kenya', 'Kenya'),
+        ('Kiribati', 'Kiribati'),
+        ('Korea', 'Korea'),
+        ('Kosovo', 'Kosovo'),
+        ('Kuwait', 'Kuwait'),
+        ('Kyrgyzstan', 'Kyrgyzstan'),
+        ("Laos People's Democratic Republic", "Laos People's Democratic Republic"),
+        ('Latvia', 'Latvia'),
+        ('Lebanon', 'Lebanon'),
+        ('Lesotho', 'Lesotho'),
+        ('Liberia', 'Liberia'),
+        ('Libya', 'Libya'),
+        ('Liechtenstein', 'Liechtenstein'),
+        ('Lithuania', 'Lithuania'),
+        ('Luxembourg', 'Luxembourg'),
+        ('Macao(China)', 'Macao(China)'),
+        ('Madagascar', 'Madagascar'),
+        ('Malawi', 'Malawi'),
+        ('Malaysia', 'Malaysia'),
+        ('Maldives', 'Maldives'),
+        ('Mali', 'Mali'),
+        ('Malta', 'Malta'),
+        ('Marshall Islands', 'Marshall Islands'),
+        ('Martinique', 'Martinique'),
+        ('Mauritania', 'Mauritania'),
+        ('Mauritius', 'Mauritius'),
+        ('Mayotte', 'Mayotte'),
+        ('Mexico', 'Mexico'),
+        ('Micronesia', 'Micronesia'),
+        ('Monaco', 'Monaco'),
+        ('Mongolia', 'Mongolia'),
+        ('Montenegro', 'Montenegro'),
+        ('Montserrat', 'Montserrat'),
+        ('Morocco', 'Morocco'),
+        ('Mozambique', 'Mozambique'),
+        ('Myanmar (Burma)', 'Myanmar (Burma)'),
+        ('Namibia', 'Namibia'),
+        ('Nauru', 'Nauru'),
+        ('Nepal', 'Nepal'),
+        ('Netherlands', 'Netherlands'),
+        ('Netherlands Antilles', 'Netherlands Antilles'),
+        ('New Caledonia', 'New Caledonia'),
+        ('New Zealand', 'New Zealand'),
+        ('Nicaragua', 'Nicaragua'),
+        ('Niger', 'Niger'),
+        ('Nigeria', 'Nigeria'),
+        ('Niue', 'Niue'),
+        ('Norfolk Islands', 'Norfolk Islands'),
+        ('North Macedonia', 'North Macedonia'),
+        ('Norway', 'Norway'),
+        ('Oman', 'Oman'),
+        ('Other Country', 'Other Country'),
+        ('Pakistan', 'Pakistan'),
+        ('Palau', 'Palau'),
+        ('Panama', 'Panama'),
+        ('Papua New Guinea', 'Papua New Guinea'),
+        ('Paraguay', 'Paraguay'),
+        ('Peru', 'Peru'),
+        ('Philippines', 'Philippines'),
+        ('Poland', 'Poland'),
+        ('Portugal', 'Portugal'),
+        ('Qatar', 'Qatar'),
+        ('Moldova', 'Moldova'),
+        ('Romania', 'Romania'),
+        ('Russia Federation', 'Russia Federation'),
+        ('Rwanda', 'Rwanda'),
+        ('Saint Barthelemy', 'Saint Barthelemy'),
+        ('Saint Kitts and Nevis', 'Saint Kitts and Nevis'),
+        ('Saint Lucia', 'Saint Lucia'),
+        ('Saint Martin', 'Saint Martin'),
+        ('St Pierre and Miquelon', 'St Pierre and Miquelon'),
+        ('Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines'),
+        ('Samoa', 'Samoa'),
+        ('San Marino', 'San Marino'),
+        ('Sao Tome and Principe', 'Sao Tome and Principe'),
+        ('Saudi Arabia', 'Saudi Arabia'),
+        ('Senegal', 'Senegal'),
+        ('Serbia', 'Serbia'),
+        ('Seychelles', 'Seychelles'),
+        ('Sierra Leone', 'Sierra Leone'),
+        ('Singapore', 'Singapore'),
+        ('Sint Maarten', 'Sint Maarten'),
+        ('Slovakia', 'Slovakia'),
+        ('Slovenia', 'Slovenia'),
+        ('Solomon Islands', 'Solomon Islands'),
+        ('Somalia', 'Somalia'),
+        ('South Africa', 'South Africa'),
+        ('Spain', 'Spain'),
+        ('Sri Lanka', 'Sri Lanka'),
+        ('Sudan', 'Sudan'),
+        ('Sudan, South', 'Sudan, South'),
+        ('Suriname', 'Suriname'),
+        ('Swaziland', 'Swaziland'),
+        ('Sweden', 'Sweden'),
+        ('Switzerland', 'Switzerland'),
+        ('Taiwan, China', 'Taiwan, China'),
+        ('Tajikistan', 'Tajikistan'),
+        ('Tanzania', 'Tanzania'),
+        ('Thailand', 'Thailand'),
+        ('Togo', 'Togo'),
+        ('Tonga', 'Tonga'),
+        ('Trinidad and Tobago', 'Trinidad and Tobago'),
+        ('Tunisia', 'Tunisia'),
+        ('Turkey', 'Turkey'),
+        ('Turkmenistan', 'Turkmenistan'),
+        ('Tuvalu', 'Tuvalu'),
+        ('Uganda', 'Uganda'),
+        ('Ukraine', 'Ukraine'),
+        ('United Arab Emirates', 'United Arab Emirates'),
+        ('United Kingdom', 'United Kingdom'),
+        ('United States', 'United States'),
+        ('Uruguay', 'Uruguay'),
+        ('Uzbekistan', 'Uzbekistan'),
+        ('Vanuatu', 'Vanuatu'),
+        ('Vatican City', 'Vatican City'),
+        ('Venezuela', 'Venezuela'),
+        ('Vietnam', 'Vietnam'),
+        ('Yemen', 'Yemen'),
+        ('Zambia', 'Zambia'),
+        ('Zimbabwe', 'Zimbabwe'),
+        ('Mainland, China', 'Mainland, China'),
+    ]
     course = models.ForeignKey(Course, on_delete=models.PROTECT)
     link =models.CharField(blank=True, null=True, max_length=500, help_text = "A link that will take to a single the Other Aliexpress Suppliers Links")
     name = models.CharField(max_length=100)   
     created_at = models.DateField(default=timezone.now)
+    country= models.CharField(max_length=100, blank=True, null=True, choices=supply_country_choices, default='Hong Kong, China')  
+    price= models.DecimalField(default=0, max_digits=10, decimal_places=2, help_text = "Aliexpress price")
     updated_at = AutoDateTimeField(default=timezone.now) 
     class Meta:
-        verbose_name_plural = "Other Aliexpress Suppliers Links"
+        verbose_name_plural = "7 Other Aliexpress Suppliers Links"
     def __str__(self):
         return self.name
     
@@ -869,11 +1147,14 @@ class AliexpressOrderGrowth(models.Model):
     ]
 
     product = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
-    order_quantity = models.PositiveIntegerField(null=True)
+    order_quantity = models.PositiveIntegerField()
     name = models.CharField(max_length=100, blank=True, null=True, choices=order_choices,)
 
     def __str__(self):
         return  self.name
+
+    class Meta:
+            verbose_name_plural = "5. AliexpressOrderGrowth" 
 
 
 class Gender(models.Model):

@@ -13,12 +13,12 @@ from .models import Course, Video, Pricing, Subscription, OtherShopifyLinks,Othe
 
 @admin.register(models.OtherShopifyLinks)
 class OtherShopifyLinksAdmin(admin.ModelAdmin):
-    list_display = ('name', 'link', 'created_at', 'updated_at')
+    list_display = ('name', 'countries', 'created_at', 'updated_at')
     
     
 @admin.register(models.OtherAliexpressSuppliersLinks)
 class OtherAliexpressSuppliersLinksAdmin(admin.ModelAdmin):
-    list_display = ('name', 'link', 'created_at', 'updated_at')
+    list_display = ('name', 'country', 'price', 'created_at', 'updated_at')
     
     
     

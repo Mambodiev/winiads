@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django_filters.views import FilterView
 
-from .models import Course, Video, City, OrderItem
+from .models import Course, Video, City, OrderItem, AliexpressOrderGrowth
 from .mixins import CoursePermissionMixin
 from .filters import CourseFilter 
 from django.core.paginator import EmptyPage, Paginator, PageNotAnInteger
@@ -18,6 +18,10 @@ class CourseListView(FilterView):
     filterset_class = CourseFilter
     template_name = "content/course_list.html"
     paginate_by = 6
+
+    def get_queryset(self, **kwargs):
+       qs = super().get_queryset(**kwargs)
+       return qs.filter(product_status='published')
     
 
 class CourseDetailView(generic.FormView):
@@ -71,21 +75,34 @@ class CourseDetailView(generic.FormView):
         context['course'] = self.get_object()
         return context
     
+# def product_chart(request):
+#     labels = []
+#     data = []
+
+#     queryset = City.objects.all()
+#     for city in queryset:
+#         labels.append(city.name)
+#         data.append(city.population)
+    
+#     return JsonResponse(data={
+#         'labels': labels,
+#         'data': data,
+#     })
+
+
 def product_chart(request):
     labels = []
     data = []
 
-    queryset = City.objects.all()
-    for city in queryset:
-        labels.append(city.name)
-        data.append(city.population)
+    queryset = AliexpressOrderGrowth.objects.all()
+    for aliexpressOrderGrowth in queryset:
+        labels.append(aliexpressOrderGrowth.name)
+        data.append(aliexpressOrderGrowth.order_quantity)
     
     return JsonResponse(data={
         'labels': labels,
         'data': data,
     })
-
-    
 
 class VideoDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "content/video_detail.html"
