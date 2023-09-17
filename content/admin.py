@@ -11,23 +11,30 @@ from .models import Course, Video, Pricing, Subscription, OtherShopifyLinks,Othe
     
 
 
-@admin.register(models.OtherShopifyLinks)
-class OtherShopifyLinksAdmin(admin.ModelAdmin):
+# @admin.register(models.OtherShopifyLinks)
+class OtherShopifyLinksInline(admin.TabularInline):
+    model = OtherShopifyLinks
     list_display = ('name', 'countries', 'created_at', 'updated_at')
+    extra = 1
+    classes = ('collapse', )
+
     
     
-@admin.register(models.OtherAliexpressSuppliersLinks)
-class OtherAliexpressSuppliersLinksAdmin(admin.ModelAdmin):
+# @admin.register(models.OtherAliexpressSuppliersLinks)
+class OtherAliexpressSuppliersLinksInline(admin.TabularInline):
+    model = OtherAliexpressSuppliersLinks
     list_display = ('name', 'country', 'price', 'created_at', 'updated_at')
-    
+    extra = 1
+    classes = ('collapse', )
     
     
 @admin.register(models.Store)
-class StoreAdmin(admin.ModelAdmin):
+class Store(admin.ModelAdmin):
     list_display = ('name', 'created_at', 'updated_at') 
 
+
 @admin.register(models.Category)
-class CategoryAdmin(admin.ModelAdmin):
+class Category(admin.ModelAdmin):
     list_display = ('name', 'created_at', 'updated_at')
    
 @admin.register(models.Country)
@@ -54,15 +61,21 @@ class LikeAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
    list_display = ['ordered_date', 'ordered', ] 
 
-@admin.register(models.AliexpressOrderGrowth)
-class AliexpressOrderGrowthAdmin(admin.ModelAdmin):
-   list_display = ['name', 'order_quantity'] 
-
+# @admin.register(models.AliexpressOrderGrowth)
+class AliexpressOrderGrowthInline(admin.TabularInline):
+    model = AliexpressOrderGrowth
+    list_display = ['name', 'order_quantity'] 
+    extra = 1
+    classes = ('collapse', )
 
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('name_of_product', 'created_at', 'updated_at','button', 'countries','img_preview')
     readonly_fields = ['img_preview']
 
+    inlines = [
+        AliexpressOrderGrowthInline, OtherAliexpressSuppliersLinksInline, OtherShopifyLinksInline,  
+    ]
+    
     def get_prepopulated_fields(self, request, obj=None):
         return {
         'slug': ('name_of_product',),

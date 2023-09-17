@@ -2099,8 +2099,8 @@ select {
   outline-offset: 2px;
 }
 
-.outline-gray-600 {
-  outline-color: #4b5563;
+.outline-gray-500 {
+  outline-color: #6b7280;
 }
 
 .ring-1 {
@@ -2244,11 +2244,6 @@ select {
 .hover\:text-green-700:hover {
   --tw-text-opacity: 1;
   color: rgb(21 128 61 / var(--tw-text-opacity));
-}
-
-.hover\:text-red-500:hover {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .hover\:text-red-700:hover {

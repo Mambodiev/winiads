@@ -33,7 +33,7 @@ class Pricing(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = "6 Pricings"
+        verbose_name_plural = "Pricings"
 
 
 class Subscription(models.Model):
@@ -138,74 +138,6 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
-
-
-# class Technology(models.Model):
-#     CATEGORIES_CHOICES = [
-#         ('shopify', 'Shopify'),
-#         ('wooCommerce', 'WooCommerce'),
-#         ('cart functionality', 'Cart Functionality'),
-#         ('magento', 'magento'),
-#         ('salesforce commerce cloud', 'Salesforce Commerce Cloud'),
-#         ('prestashop', 'PrestaShop'),
-#         ('vtex', 'VTEX'),
-#         ('bigcommerce', 'Bigcommerce'),
-#         ('ibm websphere commerce', 'IBM Websphere Commerce'),
-#         ('sap commerce cloud', 'SAP Commerce Cloud'),
-#         ('shopware', 'Shopware'),
-#         ('shoptet', 'Shoptet'),
-#         ('opencart', 'OpenCart'),
-#         ('nopcommerce', 'nopcommerce'),
-#         ('oracle commerce', 'Oracle Commerce'),
-#         ('intershop', 'Intershop'),
-#         ('hybris', 'Hybris'),
-#         ('zen cart', 'Zen Cart'),
-#         ('oracle commerce cloud', 'Oracle Commerce Cloud'),
-#         ('lightspeed ecom', 'Lightspeed eCom'),
-#         ('epages', 'EPages'),
-#         ('cloudcart', 'CloudCart'),
-#         ('kajabi', 'Kajabi'),
-#         ('loja integrada', 'Loja Integrada'),
-#         ('oxid eshop', 'OXID eShop'),
-#         ('riskified', 'Riskified'),
-#         ('x-cart', 'X-Cart'),
-#         ('commerce server', 'Commerce Server'),
-#         ('drupal commerce', 'Drupal Commerce'),
-#         ('oscommerce', 'osCommerce'),
-#         ('91app', '91App'),
-#         ('nuvemshop', 'Nuvemshop'),
-#         ('mycashflow', 'Mycashflow'),
-#         ('ticimax', 'Ticimax'),
-#         ('ecwid', 'Ecwid'),
-#         ('gambio', 'Gambio'),
-#         ('craft commerce', 'Craft Commerce'),
-#         ('ideasoft', 'Ideasoft'),
-#         ('ceres', 'Ceres'),
-#         ('t-soft', 'T-Soft'),
-#         ('storeden', 'Storeden'),
-#         ('vtex integrated store', 'VTEX Integrated Store'),
-#         ('ccv shop', 'CCV Shop'),
-#         ('big cartel', 'Big Cartel'),
-#         ('miva', 'Miva'),
-#         ('irroba', 'Irroba'),
-#         ('volusion', 'Volusion'),
-#         ('yepcomm', 'Yepcomm'),
-#         ('xtcommerce', 'xtCommerce'),
-#         ('ec-cube', 'EC-CUBE'),
-#     ]
-#     updated_at = AutoDateTimeField(default=timezone.now) 
-#     class Meta:
-#         verbose_name_plural = "Technologies"
-#     def __str__(self):
-#         return self.name
-    
-
-
-    
-    
-
-    
-
 
 
 class Order(models.Model):
@@ -729,8 +661,8 @@ class Course(models.Model):
     pricing_tiers = models.ManyToManyField(Pricing, blank=True)
     name_of_product = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
-    shopify_price = models.DecimalField(max_digits=10, decimal_places=2, help_text = "Product price from shopify")
     aliexpress_price = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2, help_text = "Product price from aliexpress")
+    shopify_price = models.DecimalField(max_digits=10, decimal_places=2, help_text = "Product price from shopify")
     shopify_links = models.TextField(blank=True, null=True, help_text = "A link that will take to a single the store")
     links_to_ads = models.TextField(blank=True, null=True, help_text = "A link that will take to ads")
     # name_of_store = models.ForeignKey(Store, related_name='store_name', blank=True, null=True, on_delete=models.PROTECT)
@@ -880,7 +812,7 @@ class OtherShopifyLinks(models.Model):
     created_at = models.DateField(default=timezone.now)
     updated_at = AutoDateTimeField(default=timezone.now) 
     class Meta:
-        verbose_name_plural = "3 Other Shopify Links"
+        verbose_name_plural = "Other Shopify Links"
     def __str__(self):
         return self.name
 
@@ -894,7 +826,7 @@ class Store(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        verbose_name_plural = "2. Stores" 
+        verbose_name_plural = "2 Stores" 
 
 
     
@@ -1132,7 +1064,7 @@ class OtherAliexpressSuppliersLinks(models.Model):
     price= models.DecimalField(default=0, max_digits=10, decimal_places=2, help_text = "Aliexpress price")
     updated_at = AutoDateTimeField(default=timezone.now) 
     class Meta:
-        verbose_name_plural = "7 Other Aliexpress Suppliers Links"
+        verbose_name_plural = "Other Aliexpress Suppliers Links"
     def __str__(self):
         return self.name
     
@@ -1156,7 +1088,7 @@ class AliexpressOrderGrowth(models.Model):
         return  self.name
 
     class Meta:
-            verbose_name_plural = "5. AliexpressOrderGrowth" 
+            verbose_name_plural = "Aliexpress Order Growth" 
 
 
 class Gender(models.Model):
