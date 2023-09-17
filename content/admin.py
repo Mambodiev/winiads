@@ -28,13 +28,16 @@ class OtherAliexpressSuppliersLinksInline(admin.TabularInline):
     classes = ('collapse', )
     
     
-@admin.register(models.Store)
-class Store(admin.ModelAdmin):
+# @admin.register(models.Store)
+class StoreInline(admin.TabularInline):
+    model = Store
     list_display = ('name', 'created_at', 'updated_at') 
-
+    extra = 1
+    classes = ('collapse', )
 
 @admin.register(models.Category)
 class Category(admin.ModelAdmin):
+    model = Category
     list_display = ('name', 'created_at', 'updated_at')
    
 @admin.register(models.Country)
@@ -73,7 +76,7 @@ class CourseAdmin(admin.ModelAdmin):
     readonly_fields = ['img_preview']
 
     inlines = [
-        AliexpressOrderGrowthInline, OtherAliexpressSuppliersLinksInline, OtherShopifyLinksInline,  
+        StoreInline, AliexpressOrderGrowthInline, OtherAliexpressSuppliersLinksInline, OtherShopifyLinksInline,  
     ]
     
     def get_prepopulated_fields(self, request, obj=None):
