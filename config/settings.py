@@ -59,8 +59,8 @@ LOCAL_APPS = [
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
-NOTIFY_EMAIL = 'mambodieu@gmail.com'
-DEFAULT_FROM_EMAIL = 'mambodieu@gmail.com'
+NOTIFY_EMAIL =os.environ.get('NOTIFY_EMAIL')
+DEFAULT_FROM_EMAIL =os.environ.get('DEFAULT_FROM_EMAIL')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,15 +90,15 @@ TEMPLATES = [
     },
 ]
 WSGI_APPLICATION = 'config.wsgi.application'
-# DATABASES = {
-#      'default': {
-#          'ENGINE': 'django.db.backends.sqlite3',
-#          'NAME': BASE_DIR / 'db.sqlite3',
-#      }
-#  }
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-}
+     'default': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
+     }
+ }
+# DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+# }
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -186,4 +186,7 @@ cloudinary.config(
   api_key =os.environ.get('api_key_KEY'),
   api_secret =os.environ.get('api_secret_KEY')
 )
+
+# NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+NPM_BIN_PATH = r"C:/Program Files/nodejs/npm.cmd"
 

@@ -4,12 +4,12 @@
 {% load cart_template_tags %}
 
 
-<nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0">
-  <div class="max-w-screen-lg flex flex-wrap items-center justify-between mx-auto px-4 py-2">
+<nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border border-b">
+  <div class="lg:max-w-[75%] flex flex-wrap items-center justify-between mx-auto px-4 py-2">
     <a href="/" class="flex items-center">
-        <span class="self-center text-lg font-semibold whitespace-nowrap text-gray-700 dark:text-gray-200">Icompeti</span>
+        <span class="self-center text-lg font-semibold whitespace-nowrap text-gray-700 dark:text-gray-200">icompeti</span>
     </a>
-    <div class="flex md:order-2  gap-4">
+    <div class="flex lg:order-2  gap-4">
         {% comment %} favorites {% endcomment %}
         <a href="{% url 'content:summary' %}" class="relative inline-flex items-center text-sm font-medium text-center text-gray-700 dark:text-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
@@ -66,7 +66,7 @@
             </button>
             <!-- Dropdown menu -->
             <div id="dropdownAvatarName" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInforlgropdownAvatarNameButtonationButton">
                   <li>
                     <a href="{% url 'users:detail' request.user.username  %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-200">{% trans "My Profile" %}</a>
                   </li>
@@ -79,7 +79,7 @@
         {% comment %} end my user, account dropdown  {% endcomment %}
 
         {% comment %} Mobile menu button {% endcomment %}
-            <div class="flex items-center md:hidden">
+            <div class="flex items-center lg:hidden">
                 <button  id="toggle-menu-button" type="button" data-collapse-toggle="navbar-sticky"  class="relative group">
                   <div class="relative flex overflow-hidden items-center justify-center rounded-full w-[40px] h-[40px] transform transition-all dark:bg-gray-900 bg-white">
                     <div class="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden">
@@ -93,8 +93,8 @@
         {% comment %} Mobile menu button {% endcomment %}
     </div>
     {% comment %} nav links {% endcomment %}
-      <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-        <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg shadow rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:rounded-none md:shadow-none dark:shadow-white-500/50 md:divide-none divide-y divide-gray-100 ">
+      <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-sticky">
+        <ul class="flex flex-col p-4 lg:p-0 mt-4 font-medium rounded-lg shadow rounded-lg  lg:flex-row lg:space-x-8 lg:mt-0 lg:rounded-none lg:shadow-none dark:shadow-white-500/50 lg:divide-none divide-y divide-gray-100 ">
           <li class='my-2'>
             <a href="{% url 'content:course-list' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200" aria-current="page"> {% trans "Product" %}</a>
           </li>

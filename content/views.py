@@ -131,7 +131,7 @@ class VideoDetailView(LoginRequiredMixin, generic.DetailView):
     
 
 class CourseView(generic.TemplateView):
-    template_name = "content/course_view.html"
+    template_name = "content/add_to_favorite.html"
 
     def get_context_data(self, **kwargs):
         context = super(CourseView, self).get_context_data(**kwargs)
