@@ -13,9 +13,10 @@ import mimetypes
 mimetypes.add_type("text/css", ".css", True)
 
 SECRET_KEY =os.environ.get('SECRET_KEY')
-DEBUG = os.environ.get('DEBUG')
-ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ['icompeti.onrender.com']
+DEBUG = os.environ.get('DEBUG', 'False').lower()=='true'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split('')
+# DEBUG = True
+# ALLOWED_HOSTS = ['*']
 BASE_DIR = Path(__file__).resolve().parent.parent
 DJANGO_APPS = [
     "django.contrib.auth",
@@ -99,6 +100,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
