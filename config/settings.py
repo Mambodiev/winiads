@@ -13,8 +13,8 @@ import mimetypes
 mimetypes.add_type("text/css", ".css", True)
 
 SECRET_KEY =os.environ.get('SECRET_KEY')
-DEBUG = os.environ.get('DEBUG', 'False').lower()=='true'
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
+DEBUG =os.environ.get('DEBUG')
+ALLOWED_HOSTS =os.environ.get('ALLOWED_HOSTS')
 # DEBUG = True
 # ALLOWED_HOSTS = ['*']
 BASE_DIR = Path(__file__).resolve().parent.parent
