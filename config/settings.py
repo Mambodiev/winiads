@@ -31,7 +31,6 @@ DJANGO_APPS = [
     'storages',
 ]
 THIRD_PARTY_APPS = [
-    'whitenoise.runserver_nostatic',
     "crispy_forms",
     "crispy_tailwind", 
     'tailwind',
