@@ -1,6 +1,6 @@
 from whitenoise import WhiteNoise
 
-from i import MyWSGIApp
+from config import MyWSGIApp
 
 application = MyWSGIApp()
 application = WhiteNoise(application, root="/path/to/static/files")
