@@ -1,8 +1,16 @@
-from whitenoise import WhiteNoise
+"""
+WSGI config for core project.
 
-from I import MyWSGIApp
+It exposes the WSGI callable as a module-level variable named ``application``.
 
-application = MyWSGIApp()
-application = WhiteNoise(application, root="/path/to/static/files")
-application.add_files("/path/to/more/static/files", prefix="more-files/")
+For more information on this file, see
+https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
+"""
+import os
+
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+
+application = get_wsgi_application()
 
