@@ -13,10 +13,10 @@ import mimetypes
 mimetypes.add_type("text/css", ".css", True)
 
 SECRET_KEY =os.environ.get('SECRET_KEY')
-# DEBUG =os.environ.get('DEBUG') == 'TRUE'
-# ALLOWED_HOSTS = ['*']
+DEBUG =os.environ.get('DEBUG') == 'TRUE'
 ALLOWED_HOSTS = ['icompeti.onrender.com']
-DEBUG = True
+# ALLOWED_HOSTS = ['127.0.0.1']
+# DEBUG = False
 BASE_DIR = Path(__file__).resolve().parent.parent
 DJANGO_APPS = [
     "django.contrib.auth",
@@ -191,4 +191,11 @@ cloudinary.config(
 
 # NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 NPM_BIN_PATH = r"C:/Program Files/nodejs/npm.cmd"
-
+STATIC_ROOT = BASE_DIR / "staticfiles"
+# STORAGES = {
+#     # ...
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
