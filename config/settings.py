@@ -13,7 +13,7 @@ import mimetypes
 mimetypes.add_type("text/css", ".css", True)
 
 SECRET_KEY =os.environ.get('SECRET_KEY')
-DEBUG =os.environ.get('DEBUG') == 'TRUE'
+DEBUG =os.environ.get('DEBUG')
 ALLOWED_HOSTS = ['icompeti.onrender.com']
 # ALLOWED_HOSTS = ['127.0.0.1']
 # DEBUG = False
