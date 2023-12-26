@@ -8,15 +8,14 @@
 {% block content %}
     <div class="max-w-screen-lg mx-auto px-4">
        
-        <p class="text-sm text-center font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200">{% translate "Over" %}<strong class="text-gray-700">
+        <p class="text-sm text-center font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200">{% translate "Over" %}<strong class="text-gray-700 dark:text-gray-200">
             {{filter.qs.count}}</strong> 
             {% translate "products." %}
         </p>
         <form method='GET' class="py-4">
             <div class=" py-2">
                 <div class="grid grid-cols-1 gap-x-4  lg:grid-cols-7 sm:grid-cols-4">
-                {{ filter.form|crispy  }}
-
+                    {{ filter.form|crispy  }}
                 </div>
                 <div class="flex md:flex-row  gap-4 flex-col">
                   <div class="basis-4/5 ">
@@ -49,7 +48,7 @@
                                 {% if course.is_faceBook %}
                                     <button type="button" title="Like post" 
                                         class="flex     
-                                        items-center justify-center dark:bg-white  
+                                        items-center justify-center  
                                         text-blue-500 hover:text-gray-200 hover:bg-gray-500 rounded-full p-1.5">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-facebook " viewBox="0 0 16 16">
                                             <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
@@ -95,12 +94,25 @@
                                 </video>
                             {% endif %}
                         </div>
+
                         <div class="relative px-3">
                             <a class="" href="{{ course.get_absolute_url }}">
-                                <h1 class="text-center text-lg font-medium text-gray-700 dark:text-gray-200 mt-2">
-                                    {{ course.name_of_product|title|truncatechars:26  }}
-                                </h1>
+                                <div class="flex justify-between w-full pb-2 space-x-2">
+                                    <div class="space-y-1">
+                                        <h3 class="text-lg font-semibold leadi sm:pr-8">{{ course.name_of_product|title|truncatechars:26  }}</h3>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-lg font-semibold text-green-500">{{ course.price_margin  }}$</p>
+                                    </div>
+                                </div>
                             </a>
+
+                            
+
+
+                            
+                       
+
                             <div class="grid grid-cols-3 text-gray-700 dark:text-gray-200 gap-2 ">
                                 <div class="flex flex-col justify-start p-2">
                                     <p class="flex text-lg font-medium">

@@ -61,4 +61,3 @@ canvas {
 select ~ .pointer-events-none {
     display: none !important;
 }
-
