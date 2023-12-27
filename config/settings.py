@@ -16,7 +16,7 @@ SECRET_KEY =os.environ.get('SECRET_KEY')
 DEBUG =os.environ.get('DEBUG')
 ALLOWED_HOSTS = ['icompeti.onrender.com']
 # ALLOWED_HOSTS = ['127.0.0.1']
-# DEBUG = False
+# DEBUG = True
 BASE_DIR = Path(__file__).resolve().parent.parent
 DJANGO_APPS = [
     "django.contrib.auth",
@@ -140,7 +140,7 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 
 
-LOGIN_REDIRECT_URL = "content:course-list"
+LOGIN_REDIRECT_URL = "content:product-list"
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True

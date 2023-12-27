@@ -1,17 +1,17 @@
 from django.urls import path
-from .views import CourseListView, CourseDetailView, VideoDetailView
+from .views import ProductListView, ProductDetailView, VideoDetailView
 from content import views
 
 app_name = "content"
 
 urlpatterns = [
     
-    path('summary/', views.CourseView.as_view(), name='summary'),
-    path('remove-from-course/<pk>/',
-         views.RemoveFromCourseView.as_view(), name='remove-from-course'),
+    path('summary/', views.ProductView.as_view(), name='summary'),
+    path('remove-from-product/<pk>/',
+         views.RemoveFromProductView.as_view(), name='remove-from-product'),
     path('product-chart/', views.product_chart, name='product-chart'),
-    path("", CourseListView.as_view(), name='course-list'),
-    path("<slug>/", CourseDetailView.as_view(), name='course-detail'),
+    path("", ProductListView.as_view(), name='product-list'),
+    path("<slug>/", ProductDetailView.as_view(), name='product-detail'),
     path("<slug>/<video_slug>/", VideoDetailView.as_view(), name='video-detail'),
     
 

@@ -156,7 +156,7 @@ class Order(models.Model):
         return f"ORDER-{self.pk}"
 
 
-class Course(models.Model):
+class Product(models.Model):
     SITE_TYPE_CHOICES = (
         (0, 'facebook'),
         (1, 'instagram'),
@@ -713,7 +713,7 @@ class Course(models.Model):
         'self', related_name='third_related', on_delete=models.SET_NULL, blank=True, null=True)
     
     def get_absolute_url(self):
-        return reverse("content:course-detail", kwargs={"slug": self.slug})
+        return reverse("content:product-detail", kwargs={"slug": self.slug})
     
     def get_update_url(self):
         return reverse("staff:product-update", kwargs={'pk': self.pk})
@@ -754,17 +754,17 @@ class Course(models.Model):
         return self.name_of_product
 
     def get_absolute_url(self):
-        return reverse("content:course-detail", kwargs={"slug": self.slug})
+        return reverse("content:product-detail", kwargs={"slug": self.slug})
 
     class Meta:
-            verbose_name_plural = "1. Courses" 
+            verbose_name_plural = "1. Products" 
             ordering = ["-updated_at"]
 
 
 class OrderItem(models.Model):
     order = models.ForeignKey(
         "Order", related_name='items', on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     updated_at = AutoDateTimeField(default=timezone.now)
 
@@ -805,7 +805,7 @@ class OtherShopifyLinks(models.Model):
         ('Argentina', 'Argentina'),
         ('Mexico', 'Mexico'),
     ]
-    course = models.ForeignKey(Course, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
     link =models.CharField(blank=True, null=True, max_length=500, help_text = "A link that will take to a single the Other Shopify Links")
     name = models.CharField(max_length=100)   
     countries = models.CharField(max_length=250, blank=True, null=True, choices=countries_choices, default='United States')
@@ -817,7 +817,7 @@ class OtherShopifyLinks(models.Model):
         return self.name
 
 class Store(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.PROTECT, blank=True, null=True,)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, blank=True, null=True,)
     name = models.CharField(max_length=100)
     store_links =models.TextField(blank=True, null=True, help_text = "link that will take to ads")
     created_at = models.DateField(default=timezone.now)
@@ -1056,7 +1056,7 @@ class OtherAliexpressSuppliersLinks(models.Model):
         ('Zimbabwe', 'Zimbabwe'),
         ('Mainland, China', 'Mainland, China'),
     ]
-    course = models.ForeignKey(Course, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
     link =models.CharField(blank=True, null=True, max_length=500, help_text = "A link that will take to a single the Other Aliexpress Suppliers Links")
     name = models.CharField(max_length=100)   
     created_at = models.DateField(default=timezone.now)
@@ -1080,7 +1080,7 @@ class AliexpressOrderGrowth(models.Model):
         ('Jun', 'Jun'),
     ]
 
-    product = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     order_quantity = models.PositiveIntegerField()
     name = models.CharField(max_length=100, blank=True, null=True, choices=order_choices,)
 
@@ -1098,7 +1098,7 @@ class Gender(models.Model):
         ('Male', 'Male'),
         ('Unkwon', 'Unknown'),
     ]
-    product = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='genders')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='genders')
     gender_number = models.IntegerField(blank=True, null=True, help_text = "ads gender number group range")
     name = models.CharField(max_length=100, blank=True, null=True,choices=gender_choices, default='Female' )
     created_at = models.DateField(default=timezone.now)
@@ -1119,7 +1119,7 @@ class Age(models.Model):
         ('65+', '65+'),
     ]
 
-    product = models.ForeignKey(Course, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     age = models.IntegerField(blank=True, null=True, help_text = "ads age group range")
     name = models.CharField(max_length=100, blank=True, null=True, choices=age_choices, default='25-34')
     created_at = models.DateField(default=timezone.now)
@@ -1139,7 +1139,7 @@ class Like(models.Model):
         ('Jun', 'Jun'),
     ]
 
-    product = models.ForeignKey(Course, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     like = models.IntegerField(blank=True, null=True, help_text = "ads like range")
     name = models.CharField(max_length=100, blank=True, null=True, choices=like_choices, default='Jan')
     created_at = models.DateField(default=timezone.now)
@@ -1151,7 +1151,7 @@ class Like(models.Model):
 
 class City(models.Model):
     name = models.CharField(max_length=30)
-    course = models.ForeignKey(Course, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
     population = models.PositiveIntegerField()
 
     class Meta:
@@ -1162,7 +1162,7 @@ class City(models.Model):
     
     
 class Video(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='videos')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='videos')
     vimeo_id = models.CharField(max_length=50)
     title = models.CharField(max_length=150)
     slug = models.SlugField(unique=True)
@@ -1178,11 +1178,11 @@ class Video(models.Model):
     def get_absolute_url(self):
         return reverse("content:video-detail", kwargs={
             "video_slug": self.slug,
-            "slug": self.course.slug
+            "slug": self.product.slug
         })
 
 
-def pre_save_course(sender, instance, *args, **kwargs):
+def pre_save_product(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = slugify(instance.name)
 
@@ -1228,7 +1228,7 @@ def post_email_confirmed(request, email_address, *args, **kwargs):
 
 # user_logged_in.connect(user_logged_in_receiver)
 email_confirmed.connect(post_email_confirmed)
-pre_save.connect(pre_save_course, sender=Course)
+pre_save.connect(pre_save_product, sender=Product)
 pre_save.connect(pre_save_video, sender=Video)
 
 

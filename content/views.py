@@ -4,43 +4,43 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django_filters.views import FilterView
 
-from .models import Course, Video, City, OrderItem, AliexpressOrderGrowth
-from .mixins import CoursePermissionMixin
-from .filters import CourseFilter 
+from .models import Product, Video, City, OrderItem, AliexpressOrderGrowth
+from .mixins import ProductPermissionMixin
+from .filters import ProductFilter 
 from django.core.paginator import EmptyPage, Paginator, PageNotAnInteger
 from django.http import JsonResponse
 from .forms import ContactForm, AddToCartForm
 from .utils import get_or_set_order_session
 
-class CourseListView(FilterView):
+class ProductListView(FilterView):
     
-    model = Course
-    filterset_class = CourseFilter
-    template_name = "content/course_list.html"
-    paginate_by = 6
+    model = Product
+    filterset_class = ProductFilter
+    template_name = "content/product_list.html"
+    paginate_by = 1
 
     def get_queryset(self, **kwargs):
        qs = super().get_queryset(**kwargs)
        return qs.filter(product_status='published')
     
 
-class CourseDetailView(generic.FormView):
-    template_name = "content/course_detail.html"
-    model = Course
+class ProductDetailView(generic.FormView):
+    template_name = "content/product_detail.html"
+    model = Product
     form_class = AddToCartForm
-    # queryset = Course.objects.all()
+    # queryset = Product.objects.all()
     
     def get_object(self):
-        return get_object_or_404(Course, slug=self.kwargs["slug"])
+        return get_object_or_404(Product, slug=self.kwargs["slug"])
     
     def get_success_url(self):
         return reverse("content:summary")
     
     def form_valid(self, form):
         order = get_or_set_order_session(self.request)
-        course = self.get_object()
+        Product = self.get_object()
 
-        item_filter = order.items.filter(course=course)
+        item_filter = order.items.filter(product=product)
 
         if item_filter.exists():
             item = item_filter.first()
@@ -49,30 +49,30 @@ class CourseDetailView(generic.FormView):
 
         else:
             new_item = form.save(commit=False)
-            new_item.course = course
+            new_item.product = product
             new_item.order = order
             new_item.save()
 
-        return super(CourseDetailView, self).form_valid(form)
+        return super(ProductDetailView, self).form_valid(form)
     
     # def get_context_data(self, **kwargs):
-    #     context = super(CourseDetailView, self).get_context_data(**kwargs)
-    #     course = self.get_course()
+    #     context = super(ProducteDetailView, self).get_context_data(**kwargs)
+    #     product = self.get_product()
     #     subscription = self.request.user.subscription
     #     pricing_tier = subscription.pricing
     #     subscription_is_active = subscription.status == "active" or subscription.status == "trialing" 
                 
     #     context.update({
-    #         "has_permission": pricing_tier in course.pricing_tiers.all() and subscription_is_active
+    #         "has_permission": pricing_tier in product.pricing_tiers.all() and subscription_is_active
     #     })
     #     return context
     
-    def get_course(self):
-        return get_object_or_404(Course, slug=self.kwargs["slug"])
+    def get_product(self):
+        return get_object_or_404(Product, slug=self.kwargs["slug"])
     
     def get_context_data(self, **kwargs):
-        context = super(CourseDetailView, self).get_context_data(**kwargs)
-        context['course'] = self.get_object()
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        context['product'] = self.get_object()
         return context
     
 # def product_chart(request):
@@ -109,32 +109,32 @@ class VideoDetailView(LoginRequiredMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(VideoDetailView, self).get_context_data(**kwargs)
-        course = self.get_course()
+        product = self.get_product()
         subscription = self.request.user.subscription
         pricing_tier = subscription.pricing
         subscription_is_active = subscription.status == "active" or subscription.status == "trialing" 
         context.update({
-            "has_permission": pricing_tier in course.pricing_tiers.all() and subscription_is_active
+            "has_permission": pricing_tier in product.pricing_tiers.all() and subscription_is_active
         })
         return context
 
-    def get_course(self):
-        return get_object_or_404(Course, slug=self.kwargs["slug"])
+    def get_product(self):
+        return get_object_or_404(Product, slug=self.kwargs["slug"])
 
     def get_object(self):
         video = get_object_or_404(Video, slug=self.kwargs["video_slug"])
         return video
 
     def get_queryset(self):
-        course = self.get_course()
-        return course.videos.all()
+        product = self.get_product()
+        return product.videos.all()
     
 
-class CourseView(generic.TemplateView):
+class ProductView(generic.TemplateView):
     template_name = "content/add_to_favorite.html"
 
     def get_context_data(self, **kwargs):
-        context = super(CourseView, self).get_context_data(**kwargs)
+        context = super(ProductView, self).get_context_data(**kwargs)
         context["order"] = get_or_set_order_session(self.request)
         return context
     
@@ -168,7 +168,7 @@ class ContactView(generic.FormView):
         return super(ContactView, self).form_valid(form)
 
 
-class RemoveFromCourseView(generic.View):
+class RemoveFromProductView(generic.View):
     def get(self, request, *args, **kwargs):
         order_item = get_object_or_404(OrderItem, id=kwargs['pk'])
         order_item.delete()

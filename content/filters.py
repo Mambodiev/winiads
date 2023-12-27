@@ -1,11 +1,11 @@
 import django_filters
-from .models import Course
+from .models import Product
 from django_filters.widgets import BooleanWidget, RangeWidget
 from django.forms.widgets import TextInput
 from django import forms
 from django.db import models
 
-class CourseFilter(django_filters.FilterSet):
+class ProductFilter(django_filters.FilterSet):
     SITE_TYPE_CHOICES = (
         (0, 'facebook'),
         (1, 'instagram'),
@@ -548,7 +548,7 @@ class CourseFilter(django_filters.FilterSet):
     site_type = django_filters.ChoiceFilter(choices=SITE_TYPE_CHOICES, field_name='site_type', empty_label='All', initial='All')
     ordering = django_filters.ChoiceFilter(label='Order', choices=CHOICES, method = 'filter_by_order', empty_label='any', initial='any')
     class Meta:
-        model = Course
+        model = Product
         fields = {
             'name':['icontains'],
         }

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from . import models
-from .models import Course, Video, Pricing, Subscription, OtherShopifyLinks,OtherAliexpressSuppliersLinks, Category, Store, Country, Gender, Age, Like, Order, AliexpressOrderGrowth, City, OrderItem
+from .models import Product, Video, Pricing, Subscription, OtherShopifyLinks,OtherAliexpressSuppliersLinks, Category, Store, Country, Gender, Age, Like, Order, AliexpressOrderGrowth, City, OrderItem
 
 
 
@@ -71,7 +71,7 @@ class AliexpressOrderGrowthInline(admin.TabularInline):
     extra = 1
     classes = ('collapse', )
 
-class CourseAdmin(admin.ModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     list_display = ('name_of_product', 'created_at', 'updated_at','button', 'countries','img_preview')
     readonly_fields = ['img_preview']
 
@@ -89,7 +89,7 @@ class CityAdmin(admin.ModelAdmin):
     list_display = ('name', 'population')
     
     
-admin.site.register(Course, CourseAdmin)
+admin.site.register(Product, ProductAdmin)
 admin.site.register(Video)
 admin.site.register(Pricing)
 admin.site.register(Subscription)

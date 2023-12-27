@@ -23,7 +23,7 @@ urlpatterns = [
 
     
     # Content
-    path("courses/", include("content.urls", namespace="content")),
+    path("products/", include("content.urls", namespace="content")),
 
     # User management
     path("users/", include("users.urls", namespace="users")),
