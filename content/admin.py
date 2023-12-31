@@ -1,6 +1,6 @@
 from django.contrib import admin
 from . import models
-from .models import Product, Video, Pricing, Subscription, OtherShopifyLinks,OtherAliexpressSuppliersLinks, Category, Store, Country, Gender, Age, Like, Order, AliexpressOrderGrowth, City, OrderItem
+from .models import Product, Video, Pricing, Subscription, OtherShopifyLinks,OtherAliexpressSuppliersLinks, Category, MainShopifyStore, Country, Gender, Age, Like, Order, AliexpressOrderGrowth, City, OrderItem
 
 
 
@@ -28,9 +28,9 @@ class OtherAliexpressSuppliersLinksInline(admin.TabularInline):
     classes = ('collapse', )
     
     
-# @admin.register(models.Store)
-class StoreInline(admin.TabularInline):
-    model = Store
+# @admin.register(models.MainShopifyStore)
+class MainShopifyStoreInline(admin.TabularInline):
+    model = MainShopifyStore
     list_display = ('name', 'created_at', 'updated_at') 
     extra = 1
     classes = ('collapse', )
@@ -76,7 +76,7 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ['img_preview']
 
     inlines = [
-        StoreInline, AliexpressOrderGrowthInline, OtherAliexpressSuppliersLinksInline, OtherShopifyLinksInline,  
+        MainShopifyStoreInline, AliexpressOrderGrowthInline, OtherAliexpressSuppliersLinksInline, OtherShopifyLinksInline,  
     ]
     
     def get_prepopulated_fields(self, request, obj=None):

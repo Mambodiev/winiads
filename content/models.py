@@ -816,7 +816,7 @@ class OtherShopifyLinks(models.Model):
     def __str__(self):
         return self.name
 
-class Store(models.Model):
+class MainShopifyStore(models.Model):
     product = models.ForeignKey(Product, on_delete=models.PROTECT, blank=True, null=True,)
     name = models.CharField(max_length=100)
     store_links =models.TextField(blank=True, null=True, help_text = "link that will take to ads")
@@ -826,7 +826,7 @@ class Store(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        verbose_name_plural = "Stores" 
+        verbose_name_plural = "MainShopifyStore" 
 
 
     

@@ -37,10 +37,10 @@
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center space-x-2">
                                 <div class="-space-y-1">
-                                    {% for store in product.store_set.all %}
-                                    <h2 class="text-lg text-gray-700 dark:text-gray-200">{{ store.name|title}}</h2>
+                                    {% for MainShopifyStore in product.MainShopifyStore_set.all %}
+                                    <h2 class="text-lg text-gray-700 dark:text-gray-200">{{ MainShopifyStore.name|title}}</h2>
                                    {% endfor %}
-                                    <span class='text-base text-gray-700 dark:text-gray-200'>{% translate "Since" %}: {{ product.created_at|date:"N j, Y,"}}</span>
+                                    <span class='text-base text-sm text-gray-700 dark:text-gray-200'>{% translate "Started running on" %} {{ product.created_at|date:"N j, Y,"}}</span>
                                 </div>
                             </div>
                             
