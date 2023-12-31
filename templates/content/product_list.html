@@ -37,9 +37,13 @@
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center space-x-2">
                                 <div class="-space-y-1">
-                                    {% for mainshopifystore in product.mainshopifystore_set.all %}
-                                    <h2 class="text-lg text-gray-700 dark:text-gray-200">{{ mainshopifystore.name|title}}</h2>
-                                   {% endfor %}
+                                    <!-- <a href="{{ product.main_shopify_links }}"> -->
+                                        {% for mainshopifystore in product.mainshopifystore_set.all %}
+                                        <a href="{{ mainshopifystore.store_links }}">
+                                            <h2 class="text-lg text-gray-700 dark:text-gray-200">{{ mainshopifystore.name|title}}</h2>
+                                        </a>
+                                        {% endfor %}
+                                    <!-- </a> -->
                                     <span class='text-base text-sm text-gray-700 dark:text-gray-200'>{% translate "Started running on" %} {{ product.created_at|date:"N j, Y,"}}</span>
                                 </div>
                             </div>
@@ -145,7 +149,7 @@
                 {% endfor %}
                 
             </div>
-        {% comment %} product grid list {% endcomment %}
+        {% comment %} end product grid list {% endcomment %}
         
         {% comment %} original paginator{% endcomment %} 
         {% comment %}

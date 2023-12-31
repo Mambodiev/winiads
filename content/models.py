@@ -662,7 +662,7 @@ class Product(models.Model):
     name_of_product = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
     shopify_price = models.DecimalField(max_digits=10, decimal_places=2, help_text = "Product price from shopify")
-    shopify_links = models.TextField(blank=True, null=True, help_text = "A link that will take to a single the store")
+    # main_shopify_links = models.TextField(blank=True, null=True, help_text = "A link that will take to a single the store")
     links_to_ads = models.TextField(blank=True, null=True, help_text = "A link that will take to ads")
     # name_of_store = models.ForeignKey(Store, related_name='store_name', blank=True, null=True, on_delete=models.PROTECT)
     categories = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE)
@@ -806,7 +806,8 @@ class OtherShopifyLinks(models.Model):
         ('Mexico', 'Mexico'),
     ]
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
-    link =models.CharField(blank=True, null=True, max_length=500, help_text = "A link that will take to a single the Other Shopify Links")
+    link =models.TextField(blank=True, null=True, help_text = "A link that will take to a single the Other Shopify Links")
+    models.CharField(blank=True, null=True, max_length=500, help_text = "")
     name = models.CharField(max_length=100)   
     countries = models.CharField(max_length=250, blank=True, null=True, choices=countries_choices, default='United States')
     created_at = models.DateField(default=timezone.now)
@@ -1057,7 +1058,7 @@ class OtherAliexpressSuppliersLinks(models.Model):
         ('Mainland, China', 'Mainland, China'),
     ]
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
-    link =models.CharField(blank=True, null=True, max_length=500, help_text = "A link that will take to a single the Other Aliexpress Suppliers Links")
+    link =models.TextField(blank=True, null=True, help_text = "A link that will take to a single the Other Aliexpress Suppliers Links")
     name = models.CharField(max_length=100)   
     created_at = models.DateField(default=timezone.now)
     country= models.CharField(max_length=100, blank=True, null=True, choices=supply_country_choices, default='Hong Kong, China')  
