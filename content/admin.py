@@ -72,7 +72,7 @@ class AliexpressOrderGrowthInline(admin.TabularInline):
     classes = ('collapse', )
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name_of_product', 'created_at', 'updated_at','button', 'countries','img_preview')
+    list_display = ('name_of_product', 'ads_started_running_on', 'updated_at','button', 'countries','img_preview')
     readonly_fields = ['img_preview']
 
     inlines = [
