@@ -1059,10 +1059,10 @@ class OtherAliexpressSuppliersLinks(models.Model):
     ]
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     link =models.TextField(blank=True, null=True, help_text = "A link that will take to a single the Other Aliexpress Suppliers Links")
-    name = models.CharField(max_length=100)   
+    name = models.CharField(max_length=100) 
+    price= models.DecimalField(default=0, max_digits=10, decimal_places=2, help_text = "Aliexpress price")  
     created_at = models.DateField(default=timezone.now)
     country= models.CharField(max_length=100, blank=True, null=True, choices=supply_country_choices, default='Hong Kong, China')  
-    price= models.DecimalField(default=0, max_digits=10, decimal_places=2, help_text = "Aliexpress price")
     updated_at = AutoDateTimeField(default=timezone.now) 
     class Meta:
         verbose_name_plural = "Other Aliexpress Suppliers Links"

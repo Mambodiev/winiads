@@ -17,7 +17,7 @@ class ProductListView(FilterView):
     model = Product
     filterset_class = ProductFilter
     template_name = "content/product_list.html"
-    paginate_by = 1
+    paginate_by = 3
 
     def get_queryset(self, **kwargs):
        qs = super().get_queryset(**kwargs)
