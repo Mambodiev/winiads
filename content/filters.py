@@ -511,10 +511,6 @@ class ProductFilter(django_filters.FilterSet):
     countries = django_filters.ChoiceFilter(field_name='countries', choices=country_choices, empty_label ='All', initial='All')
     ship_from = django_filters.ChoiceFilter(field_name='ship_from', choices=ship_from_choices, empty_label ='All', initial='All')
     language = django_filters.ChoiceFilter(field_name='language', choices=option_language, empty_label ='All', initial='All') 
-    # is_faceBook = django_filters.BooleanFilter(widget=forms.CheckboxInput())
-
-    
-    
     age__gt = django_filters.NumberFilter(field_name='age', lookup_expr 
     ='gte', label='Age min', widget=TextInput(attrs={'placeholder': 'Min','type': 'number'}))
     age__lt = django_filters.NumberFilter(field_name='age', lookup_expr 

@@ -4,6 +4,7 @@
 {% load crispy_forms_tags %}
 {% load tailwind_filters %}
 {% load cloudinary %}
+{% load widget_tweaks %}
 
 {% block content %}
     <div class="max-w-screen-lg mx-auto px-4">
@@ -12,12 +13,95 @@
             {{filter.qs.count}}</strong> 
             {% translate "products." %}
         </p>
-        <form method='GET' class="py-4">
+        <form method='GET'>
             <div class=" py-2">
                 <div class="grid grid-cols-1 gap-x-4  lg:grid-cols-7 sm:grid-cols-4">
-                    {{ filter.form|crispy  }}
+                    <!-- {{ filter.form|crispy  }} -->
+                    <div class="text-sm" >
+                        {{ filter.form.ads_type.label_tag }}
+                        {% render_field filter.form.ads_type class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.button.label_tag }}
+                        {% render_field filter.form.button class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.gender.label_tag }}
+                        {% render_field filter.form.gender class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.technology.label_tag }}
+                        {% render_field filter.form.technology class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.categories.label_tag }}
+                        {% render_field filter.form.categories class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.countries.label_tag }}
+                        {% render_field filter.form.countries class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.ship_from.label_tag }}
+                        {% render_field filter.form.ship_from class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.language.label_tag }}
+                        {% render_field filter.form.language class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.age__gt.label_tag }}
+                        {% render_field filter.form.age__gt class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.age__lt.label_tag }}
+                        {% render_field filter.form.age__lt class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.created_at__gt.label_tag }}
+                        {% render_field filter.form.created_at__gt class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.created_at__lt.label_tag }}
+                        {% render_field filter.form.created_at__lt class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.facebook_comment__gt.label_tag }}
+                        {% render_field filter.form.facebook_comment__gt class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.aliexpress_price__gt.label_tag }}
+                        {% render_field filter.form.aliexpress_price__gt class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.aliexpress_price__lt.label_tag }}
+                        {% render_field filter.form.aliexpress_price__lt class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.facebook_like__gt.label_tag }}
+                        {% render_field filter.form.facebook_like__gt class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.facebook_like__lt.label_tag }}
+                        {% render_field filter.form.facebook_like__lt class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.site_type.label_tag }}
+                        {% render_field filter.form.site_type class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <div class="text-sm">
+                        {{ filter.form.ordering.label_tag }}
+                        {% render_field filter.form.ordering class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div>
+                    <!-- <div>
+                        {{ filter.form.button.label_tag }}
+                        {% render_field filter.form.button class="block w-full px-5 py-1.5 font-normal text-gray-700  placeholder-gray-300 text-sm transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %}
+                    </div> -->
+
+
                 </div>
-                <div class="flex md:flex-row  gap-4 flex-col">
+               
+                <div class="flex md:flex-row  gap-4 flex-col mt-3">
                   <div class="basis-4/5 ">
                      <button type="submit"  class="px-8 py-2.5 leading-5 text-gray-200 transition-colors duration-300 transform bg-gray-500 rounded-md hover:bg-gray-500 focus:outline-none focus:bg-gray-500 w-full">search</button>
                   </div>
@@ -103,7 +187,7 @@
                             <a class="" href="{{ product.get_absolute_url }}">
                                 <div class="flex justify-between w-full pb-2 space-x-2">
                                     <div class="space-y-1">
-                                        <h3 class="text-lg font-semibold leadi sm:pr-8">{{ product.name_of_product|title|truncatechars:26  }}</h3>
+                                        <h3 class="text-lg font-semibold leadi sm:pr-8">{{ product.name_of_product|title|truncatechars:16  }}</h3>
                                     </div>
                                     <div class="text-right">
                                         <p class="text-lg font-semibold text-green-500">{{ product.price_margin  }}$</p>

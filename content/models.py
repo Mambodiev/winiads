@@ -159,8 +159,9 @@ class Order(models.Model):
 class Product(models.Model):
     SITE_TYPE_CHOICES = (
         (0, 'facebook'),
-        (1, 'instagram'),
+        (1, 'tiktok'),
         (2, 'pinterest'),
+
     )
     draft_options = (
         ('draft', 'Draft'),
