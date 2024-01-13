@@ -398,7 +398,7 @@
                   <li>
                       <a href="{{ othershopifylinks.link }}" target="blank" class="inline-flex items-center text-gray-700  dark:text-white hover:underline">
                        {{ othershopifylinks.name }}
-                       <span class="font-medium text-gray-700 dark:text-white ml-2">{{ othershopifylinks.countries }}</span>
+                       <!-- <span class="font-medium text-gray-700 dark:text-white ml-2">{{ othershopifylinks.countries }}</span> -->
                       </a>
                   </li>
                 {% endfor %}
@@ -409,25 +409,24 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
           <div>
               <div class="text-gray-700 dark:text-white">
-                <h2 class="mb-2 text-2xl text-gray-700 dark:text-white">Aliexpress Links</h2>
-                {% for otheraliexpresssupplierslinks in product.otheraliexpresssupplierslinks_set.all %}
+                <h2 class="mb-2 text-2xl text-gray-700 dark:text-white">Aliexpress Links</h2>               
                 <ol class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                  {% for otheraliexpresssupplierslinks in product.otheraliexpresssupplierslinks_set.all %}
                     <li>
-                        <a href="{{ otheraliexpresssupplierslinks.links }}" class="inline-flex items-center text-gray-700  dark:text-white hover:underline">
-                         {{ otheraliexpresssupplierslinks.name }}
+                        <a href="{{ otheraliexpresssupplierslinks.link }}" target="blank" class="inline-flex items-center text-gray-700  dark:text-white hover:underline">
+                        {{ otheraliexpresssupplierslinks.name }}
+                        <!-- <span class="font-medium text-gray-700 dark:text-white ml-2">{{ othershopifylinks.countries }}</span> -->
                         </a>
-                        <span class="ml-4 text-gray-700  dark:text-white">
-                          {{ otheraliexpresssupplierslinks.country }}
-                        </span>
-                        <span class="text-gray-700 dark:text-white ml-4">
-                          {{ otheraliexpresssupplierslinks.price }}
-                        </span> 
                     </li>
+                  {% endfor %}
                 </ol>
-                {% endfor %}
               </div>
+
+              
           </div>
+          
         </div>
+        
         
         <h2 class="mt-8 mb-4 text-2xl text-gray-700 dark:text-white text-center">Reated products</h2>
         <div class="grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-3  xl:gap-x-8">

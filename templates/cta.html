@@ -1,0 +1,41 @@
+
+            <!-- <p class="max-w-4xl mt-6 text-center text-gray-500 dark:text-gray-300">
+                Bring your Business to the <span class="text-blue-500">next level.</span>
+            </p>           
+        -->
+
+
+{% load static %}
+{% load i18n %}
+{% load cart_template_tags %}
+
+
+<nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0">
+  <div class="max-w-screen-lg flex flex-wrap items-center justify-between mx-auto px-4 py-2">
+    
+    <div class="flex lg:order-2  gap-4">
+       
+
+
+    </div>
+    {% comment %} nav links {% endcomment %}
+      <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-sticky">
+        <ul class="flex flex-col p-4 lg:p-0 mt-4 font-medium rounded-lg shadow rounded-lg  lg:flex-row lg:space-x-8 lg:mt-0 lg:rounded-none lg:shadow-none dark:shadow-white-500/50 lg:divide-none divide-y divide-gray-100 ">
+          <li class='my-2'>
+            <a href="{% url 'content:product-list' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200" aria-current="page"> {% trans "Product" %}</a>
+          </li>
+          <li class='my-2'>
+            <a href="{% url 'payment:enroll' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200"> {% trans "Enroll" %}</a>
+          </li>
+          <li class='my-2'>
+            <a href="{% url 'core:faq' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200"> {% trans "Faq" %}</a>
+          </li>
+          <li class='my-2'>
+            <a href="{% url 'core:contact' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200"> {% trans "Contact" %}</a>
+          </li>
+        </ul>
+      </div>
+    {% comment %} end nav links {% endcomment %} 
+
+  </div>
+</nav>

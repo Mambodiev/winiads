@@ -221,7 +221,6 @@ class Product(models.Model):
     ]
     option_ads = [
         ('faceBook', 'FaceBook'),
-        ('instagram', 'Instagram'),
         ('tiktok', 'Tiktok'),
     ]
     option_ads_type = [
@@ -524,7 +523,7 @@ class Product(models.Model):
         ('Haiti', 'Haiti'),
         ('Honduras', 'Honduras'),
         ('Hungary', 'Hungary'),
-        ('Hong Kong, China', 'Hong Kong, China'),
+        ('China', 'China'),
         ('Iceland', 'Iceland'),
         ('India', 'India'),
         ('Indonesia', 'Indonesia'),
@@ -674,12 +673,12 @@ class Product(models.Model):
     aliexpress_order = models.IntegerField(default=0, help_text = "Amount of aliexpress order generated")
     countries = models.CharField(max_length=250, blank=True, null=True, choices=countries_choices, default='United States')
     categories = models.CharField(max_length=250, blank=True, null=True, choices=categories_choices, default='tools & home improvement')
-    ship_from = models.CharField(max_length=250, blank=True, null=True, choices=ship_from_choices, default='Hong Kong, China')
+    ship_from = models.CharField(max_length=250, blank=True, null=True, choices=ship_from_choices, default='China')
     ads_type = models.CharField(max_length=250, blank=True, null=True, choices=option_ads_type, default='video')
     gender = models.CharField(max_length=250, blank=True, null=True, choices=gender_options, default='male or Female')
     technology = models.CharField(max_length=250, blank=True, null=True, choices=technologies_choices, default='shopify')
     language= models.CharField(max_length=250, blank=True, null=True, choices=option_language, default='english')
-    button = models.CharField(max_length=250, blank=True, null=True, choices=option_button, default='buy now')
+    button = models.CharField(max_length=250, blank=True, null=True, choices=option_button, default='shop now')
     facebook_like = models.IntegerField(default=0, help_text = "Amount of facebook like")
     facebook_comment = models.IntegerField(default=0, help_text = "Amount of comment generated")
     facebook_views = models.IntegerField(default=0, help_text = "Amount of views generated")
@@ -834,7 +833,7 @@ class MainShopifyStore(models.Model):
     
 class OtherAliexpressSuppliersLinks(models.Model):
     supply_country_choices = [
-        ('Hong Kong, China', 'Hong Kong, China'),
+        ('China', 'China'),
         ('Afghanistan', 'Afghanistan'),
         ('Aland Islands', 'Aland Islands'),
         ('Albania', 'Albania'),
@@ -1063,7 +1062,7 @@ class OtherAliexpressSuppliersLinks(models.Model):
     name = models.CharField(max_length=100) 
     price= models.DecimalField(default=0, max_digits=10, decimal_places=2, help_text = "Aliexpress price")  
     created_at = models.DateField(default=timezone.now)
-    country= models.CharField(max_length=100, blank=True, null=True, choices=supply_country_choices, default='Hong Kong, China')  
+    country= models.CharField(max_length=100, blank=True, null=True, choices=supply_country_choices, default='China')  
     updated_at = AutoDateTimeField(default=timezone.now) 
     class Meta:
         verbose_name_plural = "Other Aliexpress Suppliers Links"
