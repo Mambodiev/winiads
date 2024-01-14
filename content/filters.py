@@ -7,9 +7,9 @@ from django.db import models
 
 class ProductFilter(django_filters.FilterSet):
     SITE_TYPE_CHOICES = (
-        (0, 'facebook'),
-        (2, 'tiktok'),
-        (3, 'pinterest'),
+        (0, 'Facebook'),
+        (1, 'Tiktok'),
+        (2, 'Pinterest'),
     )
 
     CHOICES = (
@@ -503,14 +503,14 @@ class ProductFilter(django_filters.FilterSet):
         ('vietnamese', 'Vietnamese'),
     ]
     
-    ads_type = django_filters.ChoiceFilter(field_name='ads_type', choices=option_ads_type, empty_label='video', initial='video')
-    button = django_filters.ChoiceFilter(field_name='button', choices=option_button, empty_label = 'shop now', initial='shop now')
-    gender = django_filters.ChoiceFilter(field_name='gender', choices=gender_options, empty_label= 'male or Female', initial='male or Female')
-    technology = django_filters.ChoiceFilter(field_name='technology', choices=technology_options, empty_label ='shopify', initial='shopify')
-    categories = django_filters.ChoiceFilter(field_name='categories', choices=categories_choices, empty_label ='Beauty, Health & Hair', initial='Beauty, Health & Hair')
-    countries = django_filters.ChoiceFilter(field_name='countries', choices=country_choices, empty_label ='United States', initial='United States')
-    ship_from = django_filters.ChoiceFilter(field_name='ship_from', choices=ship_from_choices, empty_label ='China', initial='China')
-    language = django_filters.ChoiceFilter(field_name='language', choices=option_language, empty_label ='english', initial='english') 
+    ads_type = django_filters.ChoiceFilter(field_name='ads_type', choices=option_ads_type, empty_label='all', initial='all')
+    button = django_filters.ChoiceFilter(field_name='button', choices=option_button, empty_label = 'all', initial='all')
+    gender = django_filters.ChoiceFilter(field_name='gender', choices=gender_options, empty_label= 'all', initial='all')
+    technology = django_filters.ChoiceFilter(field_name='technology', choices=technology_options, empty_label ='all', initial='all')
+    categories = django_filters.ChoiceFilter(field_name='categories', choices=categories_choices, empty_label ='all', initial='all')
+    countries = django_filters.ChoiceFilter(field_name='countries', choices=country_choices, empty_label ='all', initial='all')
+    ship_from = django_filters.ChoiceFilter(field_name='ship_from', choices=ship_from_choices, empty_label ='all', initial='all')
+    language = django_filters.ChoiceFilter(field_name='language', choices=option_language, empty_label ='all', initial='all') 
     age__gt = django_filters.NumberFilter(field_name='age', lookup_expr 
     ='gte', label='Age min', widget=TextInput(attrs={'placeholder': 'Min','type': 'number'}))
     age__lt = django_filters.NumberFilter(field_name='age', lookup_expr 
@@ -541,7 +541,7 @@ class ProductFilter(django_filters.FilterSet):
     = 'lte', label='Likes max', widget=TextInput(attrs={'placeholder': 'Max', 'type': 'number'}))
     
     
-    site_type = django_filters.ChoiceFilter(choices=SITE_TYPE_CHOICES, field_name='site_type', empty_label='tiktok', initial='tiktok')
+    site_type = django_filters.ChoiceFilter(choices=SITE_TYPE_CHOICES, field_name='site_type', empty_label='all', initial='all')
     ordering = django_filters.ChoiceFilter(label='Order', choices=CHOICES, method = 'filter_by_order', empty_label='any', initial='any')
     class Meta:
         model = Product
