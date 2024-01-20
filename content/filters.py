@@ -512,9 +512,9 @@ class ProductFilter(django_filters.FilterSet):
     ship_from = django_filters.ChoiceFilter(field_name='ship_from', choices=ship_from_choices, empty_label ='all', initial='all')
     language = django_filters.ChoiceFilter(field_name='language', choices=option_language, empty_label ='all', initial='all') 
     age__gt = django_filters.NumberFilter(field_name='age', lookup_expr 
-    ='gte', label='Age min', widget=TextInput(attrs={'placeholder': 'Min','type': 'number'}))
+    ='gte', label='Age min', widget=TextInput(attrs={'placeholder': 'min','type': 'number'}))
     age__lt = django_filters.NumberFilter(field_name='age', lookup_expr 
-    = 'lte', label='Age max', widget=TextInput(attrs={'placeholder': 'Min','type': 'number'}))
+    = 'lte', label='Age max', widget=TextInput(attrs={'placeholder': 'min','type': 'number'}))
     
     
     created_at__gt = django_filters.DateFromToRangeFilter(field_name='created_at', lookup_expr 
@@ -524,21 +524,21 @@ class ProductFilter(django_filters.FilterSet):
     
     
     facebook_comment__gt = django_filters.NumberFilter(field_name='facebook_comment', lookup_expr 
-    ='gte', label='Comment min', widget=TextInput(attrs={'placeholder': 'Min', 'type': 'number'}))
+    ='gte', label='Comment min', widget=TextInput(attrs={'placeholder': 'min', 'type': 'number'}))
     facebook_comment__lt = django_filters.NumberFilter(field_name='facebook_comment', lookup_expr 
-    = 'lte', label='Comment max', widget=TextInput(attrs={'placeholder': 'Max', 'type': 'number'}))
+    = 'lte', label='Comment max', widget=TextInput(attrs={'placeholder': 'max', 'type': 'number'}))
     
     
     aliexpress_price__gt = django_filters.NumberFilter(field_name='aliexpress_price', lookup_expr 
-    ='gte', label='Price min', widget=TextInput(attrs={'placeholder': 'Min', 'type': 'number'}))
+    ='gte', label='Price min', widget=TextInput(attrs={'placeholder': 'min', 'type': 'number'}))
     aliexpress_price__lt = django_filters.NumberFilter(field_name='aliexpress_price', lookup_expr 
-    = 'lte', label='Price max', widget=TextInput(attrs={'placeholder': 'Max', 'type': 'number'}))
+    = 'lte', label='Price max', widget=TextInput(attrs={'placeholder': 'max', 'type': 'number'}))
     
     
     facebook_like__gt = django_filters.NumberFilter(field_name='facebook_like', lookup_expr 
-    ='gte', label='Likes min', widget=TextInput(attrs={'placeholder': 'Min', 'type': 'number'}))
+    ='gte', label='Likes min', widget=TextInput(attrs={'placeholder': 'min', 'type': 'number'}))
     facebook_like__lt = django_filters.NumberFilter(field_name='facebook_like', lookup_expr 
-    = 'lte', label='Likes max', widget=TextInput(attrs={'placeholder': 'Max', 'type': 'number'}))
+    = 'lte', label='Likes max', widget=TextInput(attrs={'placeholder': 'max', 'type': 'number'}))
     
     
     site_type = django_filters.ChoiceFilter(choices=SITE_TYPE_CHOICES, field_name='site_type', empty_label='all', initial='all')
