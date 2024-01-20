@@ -19,3 +19,19 @@ class Faq(models.Model):
     
     class Meta:
         verbose_name_plural = "Faq" 
+
+
+
+class Setting(models.Model):
+   
+    header_one = models.CharField(max_length=20,  blank=True, null=True)
+    text = RichTextUploadingField( blank=True, null=True)
+    what_we_do_h1 = models.CharField(max_length=200,  blank=True, null=True)
+    what_we_do_text = RichTextUploadingField( blank=True, null=True)
+    create_at=models.DateTimeField(auto_now_add=True)
+    update_at=models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.header_one
+
+

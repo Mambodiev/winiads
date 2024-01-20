@@ -12,7 +12,7 @@ from django.views.static import serve
 
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    # path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
@@ -29,7 +29,7 @@ urlpatterns = [
     path("users/", include("users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     path("payments/", include("payment.urls")),
-    path("core/", include("core.urls")),
+    path("", include("core.urls")),
     
     # tailwind things
     path("__reload__/", include("django_browser_reload.urls")),

@@ -16,7 +16,7 @@ SECRET_KEY =os.environ.get('SECRET_KEY')
 DEBUG =os.environ.get('DEBUG')
 ALLOWED_HOSTS = ['icompeti.onrender.com']
 # ALLOWED_HOSTS =  ['localhost', '127.0.0.1']
-# DEBUG = False
+# DEBUG = True
 BASE_DIR = Path(__file__).resolve().parent.parent
 DJANGO_APPS = [
     "django.contrib.auth",

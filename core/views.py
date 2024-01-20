@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.utils.translation import gettext as _
 from content.forms import ContactForm
 from django.views.generic.list import ListView
-from core.models import Faq
+from core.models import Faq, Setting
 
 
 class FaqView(ListView):
@@ -18,8 +18,14 @@ class FaqView(ListView):
 
         return context
     
-  
-    
+
+
+def setting(request):
+
+    setting = Setting.objects.get(pk=1)
+    context={'setting':setting,
+             }
+    return render(request,'pages/setting.html',context)
 
 
 class ContactView(generic.FormView):

@@ -12,17 +12,46 @@ from django.http import JsonResponse
 from .forms import ContactForm, AddToCartForm
 from .utils import get_or_set_order_session
 
-class ProductListView(FilterView):
+
+class FilteredListView(ListView):
+    filterset_class = None
+
+    def get_queryset(self):
+        # Get the queryset however you usually would.  For example:
+        queryset = super().get_queryset()
+        # Then use the query parameters and the queryset to
+        # instantiate a filterset and save it as an attribute
+        # on the view instance for later.
+        self.filterset = self.filterset_class(self.request.GET, queryset=queryset)
+        # Return the filtered queryset
+        return self.filterset.qs.distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Pass the filterset to the template - it provides the form.
+        context['filterset'] = self.filterset
+        return context
+
+
+
+class ProductListView(FilteredListView):
     
     model = Product
     filterset_class = ProductFilter
+    # product_total = len(Product.objects.filter())
+    
     template_name = "content/product_list.html"
-    paginate_by = 3
+    paginate_by = 10
 
     def get_queryset(self, **kwargs):
        qs = super().get_queryset(**kwargs)
        return qs.filter(product_status='published')
     
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductListView, self).get_context_data(**kwargs)
+        product_total= Product.objects.count()
+        return context
 
 class ProductDetailView(generic.FormView):
     template_name = "content/product_detail.html"
