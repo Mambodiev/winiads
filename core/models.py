@@ -35,3 +35,24 @@ class Setting(models.Model):
         return self.header_one
 
 
+class Privacy(models.Model):
+   
+    header = models.CharField(max_length=20,  blank=True, null=True)
+    text = RichTextUploadingField( blank=True, null=True)
+    create_at=models.DateTimeField(auto_now_add=True)
+    update_at=models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.text
+
+
+
+class Term(models.Model):
+   
+    header = models.CharField(max_length=20,  blank=True, null=True)
+    text = RichTextUploadingField( blank=True, null=True)
+    create_at=models.DateTimeField(auto_now_add=True)
+    update_at=models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.text

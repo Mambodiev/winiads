@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block head_title %}{% trans "Contact" %}{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-screen-md space-y-8">
+        <div class=" flex flex-col justify-center p-4 mx-auto md:p-8">
+            
+            <h2 class="mb-4 text-2xl font-bold leadi text-center ">{{ term.header }}</h2>
+            <p class="p-2">{{ term.text|safe }}</p>
+        </div>
+    </div>
+  </div>
+{% endblock content %}
