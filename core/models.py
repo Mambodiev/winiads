@@ -45,6 +45,9 @@ class Privacy(models.Model):
     def __str__(self):
         return self.text
 
+    class Meta:
+        verbose_name_plural = "Privacies"
+
 
 
 class Term(models.Model):
