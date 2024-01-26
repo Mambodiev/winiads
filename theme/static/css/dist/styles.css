@@ -1049,6 +1049,10 @@ select {
   margin-top: auto;
 }
 
+.mb-48 {
+  margin-bottom: 12rem;
+}
+
 .block {
   display: block;
 }
