@@ -963,6 +963,10 @@ select {
   margin-bottom: 1rem;
 }
 
+.mb-48 {
+  margin-bottom: 12rem;
+}
+
 .mb-6 {
   margin-bottom: 1.5rem;
 }
@@ -1047,10 +1051,6 @@ select {
 
 .mt-auto {
   margin-top: auto;
-}
-
-.mb-48 {
-  margin-bottom: 12rem;
 }
 
 .block {
