@@ -1149,10 +1149,6 @@ select {
   height: 100vh;
 }
 
-.min-h-\[56px\] {
-  min-height: 56px;
-}
-
 .min-h-\[70px\] {
   min-height: 70px;
 }
@@ -2024,11 +2020,6 @@ select {
 
 .tracking-widest {
   letter-spacing: 0.1em;
-}
-
-.text-\[\#007bff\] {
-  --tw-text-opacity: 1;
-  color: rgb(0 123 255 / var(--tw-text-opacity));
 }
 
 .text-blue-500 {

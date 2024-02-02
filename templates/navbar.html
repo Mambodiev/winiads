@@ -10,7 +10,7 @@
       </svg>
       <span class="sr-only">Info</span>
       <div class="ms-3 text-sm font-medium text-center">
-        We are looking for investors who are interested in our project, which is currently in development. If you are interested in investing or buying this website. If you have any questions or want more information, please contact me <a href="#" class="font-semibold underline hover:no-underline">mambodieu@gmail.com</a>
+        We are looking for investors who are interested in our project, which is currently in development. If you are interested in investing or buying this website or want more information, please contact me <a href="#" class="font-semibold underline hover:no-underline">mambodieu@gmail.com</a>
       </div>
       <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-2" aria-label="Close">
         <span class="sr-only">Close</span>
@@ -109,22 +109,22 @@
         {% comment %} Mobile menu button {% endcomment %}
     </div>
     {% comment %} nav links {% endcomment %}
-      <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-sticky">
-        <ul class="flex flex-col p-4 lg:p-0 mt-4 font-medium rounded-lg shadow rounded-lg  lg:flex-row lg:space-x-8 lg:mt-0 lg:rounded-none lg:shadow-none dark:shadow-white-500/50 lg:divide-none divide-y divide-gray-100 ">
-          <li class='my-2'>
-            <a href="{% url 'content:product-list' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200" aria-current="page"> {% trans "Product" %}</a>
-          </li>
-          <li class='my-2'>
-            <a href="{% url 'payment:enroll' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200"> {% trans "Enroll" %}</a>
-          </li>
-          <li class='my-2'>
-            <a href="{% url 'core:faq' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200"> {% trans "Faq" %}</a>
-          </li>
-          <li class='my-2'>
-            <a href="{% url 'core:contact' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200"> {% trans "Contact" %}</a>
-          </li>
-        </ul>
-      </div>
+    <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-sticky">
+      <ul class="flex flex-col p-4 lg:p-0 mt-4 font-medium rounded-lg shadow rounded-lg  lg:flex-row lg:space-x-8 lg:mt-0 lg:rounded-none lg:shadow-none dark:shadow-white-500/50 lg:divide-none divide-y divide-gray-100 ">
+        <li class='my-2'>
+          <a href="{% url 'content:product-list' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200" aria-current="page"> {% trans "Product" %}</a>
+        </li>
+        <li class='my-2'>
+          <a href="{% url 'payment:enroll' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200"> {% trans "Enroll" %}</a>
+        </li>
+        <li class='my-2'>
+          <a href="{% url 'core:faq' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200"> {% trans "Faq" %}</a>
+        </li>
+        <li class='my-2'>
+          <a href="{% url 'core:contact' %}" class="block text-sm font-semibold leading-6 text-gray-700 dark:text-gray-200 text-gray-700 dark:text-gray-200"> {% trans "Contact" %}</a>
+        </li>
+      </ul>
+    </div>
     {% comment %} end nav links {% endcomment %} 
 
   </div>
